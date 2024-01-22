@@ -1,6 +1,6 @@
-import { useEffect } from 'react'
+import { useEffect, JSX } from 'react'
 
-const App = (): React.JSX => {
+const App = (): JSX.Element => {
   useEffect(() => {
     console.log('FUN')
   }, [])
