@@ -1,11 +1,12 @@
-import { useEffect, JSX } from 'react'
+import { JSX } from 'react'
+import css from './App.module.scss'
 
 const App = (): JSX.Element => {
-  useEffect(() => {
-    console.log('FUN')
-  }, [])
-
-  return <h2>App</h2>
+  return (
+    <div className={css.app}>
+      <h2>Create Save Recipe</h2>
+    </div>
+  )
 }
 
 export default App
