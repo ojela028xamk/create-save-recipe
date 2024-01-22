@@ -9,7 +9,10 @@
       "plugin:@typescript-eslint/recommended",
       "prettier",
       "plugin:prettier/recommended",
-      "plugin:import/recommended"
+      "plugin:import/recommended",
+      "plugin:import/errors",
+      "plugin:import/warnings",
+      "plugin:import/typescript"
     ],
     "overrides": [],
     "parser": "@typescript-eslint/parser",
@@ -38,7 +41,10 @@
     },
     "settings": {
       "import/resolver": {
-        "typescript": {}
+        "typescript": {},
+        "node": {
+          "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        }
       }
     }
   }
