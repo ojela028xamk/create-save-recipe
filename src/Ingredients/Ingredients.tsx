@@ -1,6 +1,7 @@
 import { JSX, useState } from 'react'
 import { Button, Form, Table } from 'react-bootstrap'
 import css from './Ingredients.module.scss'
+import { useEffectOnce } from 'react-use'
 
 enum IngredientUnitValue {
   GRAM = 'g',
@@ -8,6 +9,7 @@ enum IngredientUnitValue {
 }
 
 type IngredientItem = {
+  id: string
   name: string
   amount: number
   unit: IngredientUnitValue | string
@@ -21,14 +23,39 @@ const Ingredients = (): JSX.Element => {
   >('')
   const [ingredientList, setIngredientList] = useState<IngredientItem[]>([])
 
+  const getIngredientList = (): void => {
+    const keys = Object.keys(sessionStorage)
+    const currentIngredients: IngredientItem[] = []
+
+    for (const key of keys) {
+      const ingredientItem = sessionStorage.getItem(key)
+      if (ingredientItem) {
+        currentIngredients.push(JSON.parse(ingredientItem))
+      }
+    }
+
+    setIngredientList(currentIngredients)
+  }
+
+  const getId = (): string => {
+    return Date.now().toString(36)
+  }
+
   const handleNewIngredient = (): void => {
     const newIngredient: IngredientItem = {
+      id: getId(),
       name: ingredientName,
       amount: ingredientAmount,
       unit: ingredientUnit,
     }
-    setIngredientList([...ingredientList, newIngredient])
+
+    sessionStorage.setItem(newIngredient.id, JSON.stringify(newIngredient))
+    getIngredientList()
   }
+
+  useEffectOnce(() => {
+    getIngredientList()
+  })
 
   return (
     <div className={css.ingredients}>
@@ -46,7 +73,7 @@ const Ingredients = (): JSX.Element => {
           <Form.Control
             type="number"
             value={ingredientAmount}
-            placeholder="Name..."
+            placeholder="Amount..."
             onChange={(event) =>
               setIngredientAmount(Number(event.currentTarget.value))
             }
@@ -82,7 +109,7 @@ const Ingredients = (): JSX.Element => {
           <tbody>
             {ingredientList && ingredientList.length ? (
               ingredientList.map((item) => (
-                <tr key={`ingredientList-${item}`}>
+                <tr key={item.id}>
                   <th>{item.name}</th>
                   <th>{item.amount}</th>
                   <th>{item.unit}</th>
