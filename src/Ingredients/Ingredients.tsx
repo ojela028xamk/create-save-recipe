@@ -24,10 +24,10 @@ const Ingredients = (): JSX.Element => {
   const [ingredientList, setIngredientList] = useState<IngredientItem[]>([])
 
   const getIngredientList = (): void => {
-    const keys = Object.keys(sessionStorage)
+    const storageIngredients = Object.keys(sessionStorage)
     const currentIngredients: IngredientItem[] = []
 
-    for (const key of keys) {
+    for (const key of storageIngredients) {
       const ingredientItem = sessionStorage.getItem(key)
       if (ingredientItem) {
         currentIngredients.push(JSON.parse(ingredientItem))
