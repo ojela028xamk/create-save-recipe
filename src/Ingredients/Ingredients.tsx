@@ -30,7 +30,11 @@ const Ingredients = (): JSX.Element => {
     for (const key of storageIngredients) {
       const ingredientItem = sessionStorage.getItem(key)
       if (ingredientItem) {
-        currentIngredients.push(JSON.parse(ingredientItem))
+        const parsedIngredientItem = JSON.parse(ingredientItem)
+
+        if (parsedIngredientItem.hasOwnProperty('name')) {
+          currentIngredients.push(JSON.parse(ingredientItem))
+        }
       }
     }
 

@@ -1,9 +1,54 @@
 import { JSX, useState } from 'react'
 import css from './Instructions.module.scss'
 import { Button, Form, ListGroup } from 'react-bootstrap'
+import { useEffectOnce } from 'react-use'
+
+type InstructionItem = {
+  id: string
+  step: string
+}
 
 const Instructions = (): JSX.Element => {
-  const [instructionItem, setInstructionItem] = useState<string>('')
+  const [instructionStep, setInstructionStep] = useState<string>('')
+  const [instructionList, setInstructionList] = useState<InstructionItem[]>([])
+
+  const getInstructionList = (): void => {
+    const storageInstructions = Object.keys(sessionStorage)
+    const currentInstructions: InstructionItem[] = []
+
+    for (const key of storageInstructions) {
+      const instructionItem = sessionStorage.getItem(key)
+
+      if (instructionItem) {
+        const parsedInstructionItem = JSON.parse(instructionItem)
+
+        if (parsedInstructionItem.hasOwnProperty('step')) {
+          currentInstructions.push(parsedInstructionItem)
+        }
+      }
+    }
+
+    setInstructionList(currentInstructions)
+  }
+
+  const getId = (): string => {
+    return Date.now().toString(36)
+  }
+
+  const handleNewInstruction = (): void => {
+    if (!instructionStep || !instructionStep.length) return
+    const newIngredient: InstructionItem = {
+      id: getId(),
+      step: instructionStep,
+    }
+
+    sessionStorage.setItem(newIngredient.id, JSON.stringify(newIngredient))
+    getInstructionList()
+  }
+
+  useEffectOnce(() => {
+    getInstructionList()
+  })
 
   return (
     <div className={css.instructions}>
@@ -13,16 +58,29 @@ const Instructions = (): JSX.Element => {
           <Form.Label>Instruction</Form.Label>
           <Form.Control
             type="text"
-            value={instructionItem}
+            value={instructionStep}
             placeholder="Add an instruction..."
-            onChange={(event) => setInstructionItem(event.currentTarget.value)}
+            onChange={(event) => setInstructionStep(event.currentTarget.value)}
           ></Form.Control>
         </Form>
         <br />
-        <Button variant="success">Add an instruction +</Button>
+        <Button variant="success" onClick={handleNewInstruction}>
+          Add an instruction +
+        </Button>
       </div>
+      <br />
       <div className={css.instructions_list}>
-        <ListGroup></ListGroup>
+        {instructionList && instructionList.length ? (
+          <ListGroup as="ol" numbered>
+            {instructionList.map((instruction) => (
+              <ListGroup.Item key={instruction.id} as="li">
+                {instruction.step}
+              </ListGroup.Item>
+            ))}
+          </ListGroup>
+        ) : (
+          <h5>No instructions yet...</h5>
+        )}
       </div>
     </div>
   )
