@@ -104,6 +104,9 @@ const Ingredients = (): JSX.Element => {
               <th>Name</th>
               <th>Amount</th>
               <th>Unit</th>
+              <th>
+                <i className="bi bi-trash"></i>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -113,11 +116,16 @@ const Ingredients = (): JSX.Element => {
                   <th>{item.name}</th>
                   <th>{item.amount}</th>
                   <th>{item.unit}</th>
+                  <th>
+                    <Button variant="outline-danger" size="sm">
+                      X
+                    </Button>
+                  </th>
                 </tr>
               ))
             ) : (
               <tr>
-                <th colSpan={3}>No ingredients...</th>
+                <th colSpan={4}>No ingredients...</th>
               </tr>
             )}
           </tbody>
