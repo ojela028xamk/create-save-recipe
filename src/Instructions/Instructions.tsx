@@ -43,6 +43,7 @@ const Instructions = (): JSX.Element => {
     }
 
     sessionStorage.setItem(newIngredient.id, JSON.stringify(newIngredient))
+    setInstructionStep('')
     getInstructionList()
   }
 
