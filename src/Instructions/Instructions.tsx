@@ -46,6 +46,11 @@ const Instructions = (): JSX.Element => {
     getInstructionList()
   }
 
+  const handleDeleteInstruction = (instructionId: string): void => {
+    sessionStorage.removeItem(instructionId)
+    getInstructionList()
+  }
+
   useEffectOnce(() => {
     getInstructionList()
   })
@@ -74,7 +79,14 @@ const Instructions = (): JSX.Element => {
           <ListGroup as="ol" numbered>
             {instructionList.map((instruction) => (
               <ListGroup.Item key={instruction.id} as="li">
-                {instruction.step}
+                {instruction.step}{' '}
+                <Button
+                  variant="outline-danger"
+                  size="sm"
+                  onClick={() => handleDeleteInstruction(instruction.id)}
+                >
+                  X
+                </Button>
               </ListGroup.Item>
             ))}
           </ListGroup>
