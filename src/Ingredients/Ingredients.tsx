@@ -37,6 +37,11 @@ const Ingredients = (): JSX.Element => {
     setIngredientList(currentIngredients)
   }
 
+  const handleDeleteIngredient = (ingredientId: string): void => {
+    sessionStorage.removeItem(ingredientId)
+    getIngredientList()
+  }
+
   const getId = (): string => {
     return Date.now().toString(36)
   }
@@ -117,7 +122,11 @@ const Ingredients = (): JSX.Element => {
                   <th>{item.amount}</th>
                   <th>{item.unit}</th>
                   <th>
-                    <Button variant="outline-danger" size="sm">
+                    <Button
+                      variant="outline-danger"
+                      size="sm"
+                      onClick={() => handleDeleteIngredient(item.id)}
+                    >
                       X
                     </Button>
                   </th>
