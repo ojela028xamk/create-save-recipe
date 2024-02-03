@@ -92,7 +92,7 @@ const Instructions = (): JSX.Element => {
             ))}
           </ListGroup>
         ) : (
-          <h5>No instructions yet...</h5>
+          <h5>No instructions...</h5>
         )}
       </div>
     </div>
