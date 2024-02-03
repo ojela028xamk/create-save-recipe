@@ -2,11 +2,7 @@ import { JSX, useState } from 'react'
 import css from './Instructions.module.scss'
 import { Button, Form, ListGroup } from 'react-bootstrap'
 import { useEffectOnce } from 'react-use'
-
-type InstructionItem = {
-  id: string
-  step: string
-}
+import { InstructionItem, StorageType } from '../globalTypes'
 
 const Instructions = (): JSX.Element => {
   const [instructionStep, setInstructionStep] = useState<string>('')
@@ -40,6 +36,7 @@ const Instructions = (): JSX.Element => {
     const newIngredient: InstructionItem = {
       id: getId(),
       step: instructionStep,
+      storageType: StorageType.INSTRUCTION,
     }
 
     sessionStorage.setItem(newIngredient.id, JSON.stringify(newIngredient))

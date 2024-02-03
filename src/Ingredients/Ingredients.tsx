@@ -2,18 +2,11 @@ import { JSX, useState } from 'react'
 import { Button, Form, Table } from 'react-bootstrap'
 import css from './Ingredients.module.scss'
 import { useEffectOnce } from 'react-use'
-
-enum IngredientUnitValue {
-  GRAM = 'g',
-  MILLILITRE = 'ml',
-}
-
-type IngredientItem = {
-  id: string
-  name: string
-  amount: number
-  unit: IngredientUnitValue | string
-}
+import {
+  IngredientItem,
+  IngredientUnitValue,
+  StorageType,
+} from '../globalTypes'
 
 const Ingredients = (): JSX.Element => {
   const [ingredientName, setIngredientName] = useState<string>('')
@@ -56,6 +49,7 @@ const Ingredients = (): JSX.Element => {
       name: ingredientName,
       amount: ingredientAmount,
       unit: ingredientUnit,
+      storageType: StorageType.INGREDIENT,
     }
 
     sessionStorage.setItem(newIngredient.id, JSON.stringify(newIngredient))
