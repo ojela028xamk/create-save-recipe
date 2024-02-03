@@ -2,18 +2,12 @@ import { JSX, useState } from 'react'
 import { Button, Form, Table } from 'react-bootstrap'
 import css from './Ingredients.module.scss'
 import { useEffectOnce } from 'react-use'
-
-enum IngredientUnitValue {
-  GRAM = 'g',
-  MILLILITRE = 'ml',
-}
-
-type IngredientItem = {
-  id: string
-  name: string
-  amount: number
-  unit: IngredientUnitValue | string
-}
+import {
+  IngredientItem,
+  IngredientUnitValue,
+  StorageType,
+} from '../globalTypes'
+import { getSessionStorage } from '../Services/storageService'
 
 const Ingredients = (): JSX.Element => {
   const [ingredientName, setIngredientName] = useState<string>('')
@@ -24,21 +18,8 @@ const Ingredients = (): JSX.Element => {
   const [ingredientList, setIngredientList] = useState<IngredientItem[]>([])
 
   const getIngredientList = (): void => {
-    const storageIngredients = Object.keys(sessionStorage)
-    const currentIngredients: IngredientItem[] = []
-
-    for (const key of storageIngredients) {
-      const ingredientItem = sessionStorage.getItem(key)
-      if (ingredientItem) {
-        const parsedIngredientItem = JSON.parse(ingredientItem)
-
-        if (parsedIngredientItem.hasOwnProperty('name')) {
-          currentIngredients.push(JSON.parse(ingredientItem))
-        }
-      }
-    }
-
-    setIngredientList(currentIngredients)
+    const storageIngredients = getSessionStorage(StorageType.INGREDIENT)
+    setIngredientList(storageIngredients as IngredientItem[])
   }
 
   const handleDeleteIngredient = (ingredientId: string): void => {
@@ -56,6 +37,7 @@ const Ingredients = (): JSX.Element => {
       name: ingredientName,
       amount: ingredientAmount,
       unit: ingredientUnit,
+      storageType: StorageType.INGREDIENT,
     }
 
     sessionStorage.setItem(newIngredient.id, JSON.stringify(newIngredient))

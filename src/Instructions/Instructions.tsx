@@ -2,33 +2,16 @@ import { JSX, useState } from 'react'
 import css from './Instructions.module.scss'
 import { Button, Form, ListGroup } from 'react-bootstrap'
 import { useEffectOnce } from 'react-use'
-
-type InstructionItem = {
-  id: string
-  step: string
-}
+import { InstructionItem, StorageType } from '../globalTypes'
+import { getSessionStorage } from '../Services/storageService'
 
 const Instructions = (): JSX.Element => {
   const [instructionStep, setInstructionStep] = useState<string>('')
   const [instructionList, setInstructionList] = useState<InstructionItem[]>([])
 
   const getInstructionList = (): void => {
-    const storageInstructions = Object.keys(sessionStorage)
-    const currentInstructions: InstructionItem[] = []
-
-    for (const key of storageInstructions) {
-      const instructionItem = sessionStorage.getItem(key)
-
-      if (instructionItem) {
-        const parsedInstructionItem = JSON.parse(instructionItem)
-
-        if (parsedInstructionItem.hasOwnProperty('step')) {
-          currentInstructions.push(parsedInstructionItem)
-        }
-      }
-    }
-
-    setInstructionList(currentInstructions)
+    const storageInstructions = getSessionStorage(StorageType.INSTRUCTION)
+    setInstructionList(storageInstructions as InstructionItem[])
   }
 
   const getId = (): string => {
@@ -40,6 +23,7 @@ const Instructions = (): JSX.Element => {
     const newIngredient: InstructionItem = {
       id: getId(),
       step: instructionStep,
+      storageType: StorageType.INSTRUCTION,
     }
 
     sessionStorage.setItem(newIngredient.id, JSON.stringify(newIngredient))
