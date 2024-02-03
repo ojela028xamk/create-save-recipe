@@ -7,6 +7,7 @@ import {
   IngredientUnitValue,
   StorageType,
 } from '../globalTypes'
+import { getSessionStorage } from '../Services/storageService'
 
 const Ingredients = (): JSX.Element => {
   const [ingredientName, setIngredientName] = useState<string>('')
@@ -17,21 +18,8 @@ const Ingredients = (): JSX.Element => {
   const [ingredientList, setIngredientList] = useState<IngredientItem[]>([])
 
   const getIngredientList = (): void => {
-    const storageIngredients = Object.keys(sessionStorage)
-    const currentIngredients: IngredientItem[] = []
-
-    for (const key of storageIngredients) {
-      const ingredientItem = sessionStorage.getItem(key)
-      if (ingredientItem) {
-        const parsedIngredientItem = JSON.parse(ingredientItem)
-
-        if (parsedIngredientItem.hasOwnProperty('name')) {
-          currentIngredients.push(JSON.parse(ingredientItem))
-        }
-      }
-    }
-
-    setIngredientList(currentIngredients)
+    const storageIngredients = getSessionStorage(StorageType.INGREDIENT)
+    setIngredientList(storageIngredients as IngredientItem[])
   }
 
   const handleDeleteIngredient = (ingredientId: string): void => {
