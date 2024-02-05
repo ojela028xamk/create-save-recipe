@@ -1,3 +1,4 @@
+// https://react-pdf.org/
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
 
 const styles = StyleSheet.create({
@@ -16,10 +17,13 @@ const PreviewPDF = (): JSX.Element => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.section}>
-        <Text>Section #1</Text>
+        <Text>Ingredients</Text>
       </View>
       <View style={styles.section}>
-        <Text>Section #2</Text>
+        <Text>Instructions</Text>
+      </View>
+      <View style={styles.section}>
+        <Text>Image</Text>
       </View>
     </Page>
   </Document>

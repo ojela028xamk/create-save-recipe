@@ -1,3 +1,4 @@
+// https://react-pdf.org/
 import { JSX } from 'react'
 import css from './Preview.module.scss'
 import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer'
@@ -10,8 +11,9 @@ const Preview = (): JSX.Element => {
       <PDFViewer>
         <PreviewPDF />
       </PDFViewer>
+      <br />
       <PDFDownloadLink document={<PreviewPDF />} fileName="testi.pdf">
-        {({ loading }) => (loading ? 'Loading document...' : 'Download now!')}
+        {({ loading }) => (loading ? 'Loading document...' : 'Download PDF')}
       </PDFDownloadLink>
     </div>
   )
