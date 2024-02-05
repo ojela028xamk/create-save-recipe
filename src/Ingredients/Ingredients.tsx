@@ -52,6 +52,7 @@ const Ingredients = (): JSX.Element => {
 
     sessionStorage.setItem(newIngredient.id, JSON.stringify(newIngredient))
     setShowValidated(false)
+    setIngredientName('')
     getIngredientList()
   }
 

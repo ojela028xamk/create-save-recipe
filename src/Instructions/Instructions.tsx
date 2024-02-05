@@ -1,4 +1,4 @@
-import { JSX, useState } from 'react'
+import { FormEvent, JSX, useState } from 'react'
 import css from './Instructions.module.scss'
 import { Button, Form, ListGroup } from 'react-bootstrap'
 import { useEffectOnce } from 'react-use'
@@ -8,6 +8,7 @@ import { getSessionStorage } from '../Services/storageService'
 const Instructions = (): JSX.Element => {
   const [instructionStep, setInstructionStep] = useState<string>('')
   const [instructionList, setInstructionList] = useState<InstructionItem[]>([])
+  const [showValidated, setShowValidated] = useState<boolean>(false)
 
   const getInstructionList = (): void => {
     const storageInstructions = getSessionStorage(StorageType.INSTRUCTION)
@@ -18,8 +19,14 @@ const Instructions = (): JSX.Element => {
     return Date.now().toString(36)
   }
 
-  const handleNewInstruction = (): void => {
-    if (!instructionStep || !instructionStep.length) return
+  const handleNewInstruction = (event: FormEvent<HTMLFormElement>): void => {
+    event.preventDefault()
+
+    if (event.currentTarget.checkValidity() === false) {
+      setShowValidated(true)
+      return
+    }
+
     const newIngredient: InstructionItem = {
       id: getId(),
       step: instructionStep,
@@ -27,6 +34,7 @@ const Instructions = (): JSX.Element => {
     }
 
     sessionStorage.setItem(newIngredient.id, JSON.stringify(newIngredient))
+    setShowValidated(false)
     setInstructionStep('')
     getInstructionList()
   }
@@ -44,19 +52,24 @@ const Instructions = (): JSX.Element => {
     <div className={css.instructions}>
       <div className={css.instructions_add}>
         <h3>Instructions</h3>
-        <Form>
+        <Form
+          noValidate
+          validated={showValidated}
+          onSubmit={(event) => handleNewInstruction(event)}
+        >
           <Form.Label>Instruction</Form.Label>
           <Form.Control
+            required
             type="text"
             value={instructionStep}
             placeholder="Add an instruction..."
             onChange={(event) => setInstructionStep(event.currentTarget.value)}
           ></Form.Control>
+          <br />
+          <Button type="submit" variant="success">
+            Add an instruction +
+          </Button>
         </Form>
-        <br />
-        <Button variant="success" onClick={handleNewInstruction}>
-          Add an instruction +
-        </Button>
       </div>
       <br />
       <div className={css.instructions_list}>
