@@ -16,6 +16,7 @@ const Ingredients = (): JSX.Element => {
     IngredientUnitValue | string
   >('')
   const [ingredientList, setIngredientList] = useState<IngredientItem[]>([])
+  const [showValidated, setShowValidated] = useState<boolean>(false)
 
   const getIngredientList = (): void => {
     const storageIngredients = getSessionStorage(StorageType.INGREDIENT)
@@ -31,7 +32,16 @@ const Ingredients = (): JSX.Element => {
     return Date.now().toString(36)
   }
 
-  const handleNewIngredient = (): void => {
+  const handleNewIngredient = (
+    event: React.FormEvent<HTMLFormElement>
+  ): void => {
+    event.preventDefault()
+
+    if (event.currentTarget.checkValidity() === false) {
+      setShowValidated(true)
+      return
+    }
+
     const newIngredient: IngredientItem = {
       id: getId(),
       name: ingredientName,
@@ -41,6 +51,8 @@ const Ingredients = (): JSX.Element => {
     }
 
     sessionStorage.setItem(newIngredient.id, JSON.stringify(newIngredient))
+    setShowValidated(false)
+    setIngredientName('')
     getIngredientList()
   }
 
@@ -52,16 +64,23 @@ const Ingredients = (): JSX.Element => {
     <div className={css.ingredients}>
       <div className={css.ingredients_add}>
         <h3>Ingredients</h3>
-        <Form>
+        <Form
+          noValidate
+          validated={showValidated}
+          onSubmit={(event) => handleNewIngredient(event)}
+        >
           <Form.Label>Name</Form.Label>
           <Form.Control
+            required
             type="text"
             value={ingredientName}
             placeholder="Name..."
             onChange={(event) => setIngredientName(event.currentTarget.value)}
           />
+
           <Form.Label>Amount</Form.Label>
           <Form.Control
+            required
             type="number"
             value={ingredientAmount}
             placeholder="Amount..."
@@ -71,6 +90,7 @@ const Ingredients = (): JSX.Element => {
           />
           <Form.Label>Unit</Form.Label>
           <Form.Select
+            required
             aria-label="Default select example"
             onChange={(event) => setIngredientUnit(event.currentTarget.value)}
           >
@@ -81,11 +101,11 @@ const Ingredients = (): JSX.Element => {
               </option>
             ))}
           </Form.Select>
+          <br />
+          <Button type="submit" variant="success">
+            Add an ingredient +
+          </Button>
         </Form>
-        <br />
-        <Button variant="success" onClick={() => handleNewIngredient()}>
-          Add an ingredient +
-        </Button>
       </div>
       <br />
       <div className={css.ingredients_list}>
