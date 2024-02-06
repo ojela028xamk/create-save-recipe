@@ -1,31 +1,50 @@
 // https://react-pdf.org/
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer'
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  StyleSheet,
+  Image,
+} from '@react-pdf/renderer'
 
 const styles = StyleSheet.create({
-  page: {
-    backgroundColor: '#E4E4E4',
+  header: {
+    border: '2px solid black',
+    paddingTop: 35,
+    paddingBottom: 65,
+    paddingHorizontal: 35,
+  },
+  header_text: {
+    position: 'absolute',
+    top: '120',
+    left: '150',
+    border: '2px solid black',
+    fontSize: 50,
+  },
+  header_image: {
+    border: '5px solid black',
+    width: '50%',
+    zIndex: '-1',
   },
   section: {
-    margin: 10,
-    padding: 10,
-    flexGrow: 1,
+    border: '2px solid black',
   },
 })
 
 const PreviewPDF = (): JSX.Element => (
   <Document>
-    <Page size="A4" style={styles.page}>
-      <View style={styles.section}>
-        <Text>Recipe Name</Text>
+    <Page size="A4">
+      <View style={styles.header}>
+        <Text style={styles.header_text}>Recipe Name</Text>
+        <Image
+          src={'https://react-pdf.org/images/og-banner.png'}
+          style={styles.header_image}
+        ></Image>
       </View>
-      <View style={styles.section}>
+      <View>
         <Text>Ingredients</Text>
-      </View>
-      <View style={styles.section}>
         <Text>Instructions</Text>
-      </View>
-      <View style={styles.section}>
-        <Text>Image</Text>
       </View>
     </Page>
   </Document>
