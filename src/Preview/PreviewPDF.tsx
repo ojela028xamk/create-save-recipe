@@ -30,6 +30,16 @@ const styles = StyleSheet.create({
   section: {
     border: '2px solid black',
   },
+  content: {
+    display: 'flex',
+    flexDirection: 'row',
+    paddingTop: 35,
+    paddingBottom: 65,
+    paddingHorizontal: 35,
+    border: '2px solid black',
+  },
+  ingredients: { border: '2px solid black', flex: 1 },
+  instructions: { border: '2px solid black', flex: 1 },
 })
 
 const PreviewPDF = (): JSX.Element => (
@@ -42,9 +52,9 @@ const PreviewPDF = (): JSX.Element => (
           style={styles.header_image}
         ></Image>
       </View>
-      <View>
-        <Text>Ingredients</Text>
-        <Text>Instructions</Text>
+      <View style={styles.content}>
+        <Text style={styles.ingredients}>Ingredients</Text>
+        <Text style={styles.instructions}>Instructions</Text>
       </View>
     </Page>
   </Document>
