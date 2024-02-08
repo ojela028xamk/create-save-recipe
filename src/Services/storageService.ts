@@ -1,4 +1,22 @@
-import { IngredientItem, InstructionItem, StorageType } from '../globalTypes'
+import {
+  IngredientItem,
+  InstructionItem,
+  RecipeNameValue,
+  StorageType,
+} from '../globalTypes'
+
+const getRecipeNameFromSessionStorage = (): string => {
+  const storageRecipeName = sessionStorage.getItem('recipeNameStorage')
+
+  if (storageRecipeName) {
+    const parsedStorageRecipeName = JSON.parse(
+      storageRecipeName
+    ) as RecipeNameValue
+    return parsedStorageRecipeName.recipe_name
+  } else {
+    return ''
+  }
+}
 
 const getSessionStorage = (
   type: StorageType
@@ -21,4 +39,4 @@ const getSessionStorage = (
   return storageList
 }
 
-export { getSessionStorage }
+export { getRecipeNameFromSessionStorage, getSessionStorage }

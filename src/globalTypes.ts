@@ -3,6 +3,11 @@ export enum StorageType {
   INSTRUCTION = 'Instruction',
 }
 
+export type RecipeNameValue = {
+  id: string
+  recipe_name: string
+}
+
 export enum IngredientUnitValue {
   GRAM = 'g',
   MILLILITRE = 'ml',
