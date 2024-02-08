@@ -4,15 +4,21 @@ import css from './Preview.module.scss'
 import { PDFViewer } from '@react-pdf/renderer'
 import PreviewPDF from './PreviewPDF'
 import { IngredientItem, InstructionItem, StorageType } from '../globalTypes'
-import { getSessionStorage } from '../Services/storageService'
+import {
+  getRecipeNameFromSessionStorage,
+  getSessionStorage,
+} from '../Services/storageService'
 
 const Preview = (): JSX.Element => {
+  const [pdfRecipeName, setPdfRecipeName] = useState<string>('')
   const [pdfIngredients, setPdfIngredients] = useState<IngredientItem[]>([])
   const [pdfInstructions, setPdfInstructions] = useState<InstructionItem[]>([])
 
   const getStorage = (): void => {
+    const currentRecName = getRecipeNameFromSessionStorage()
     const currentIngr = getSessionStorage(StorageType.INGREDIENT)
     const currentInst = getSessionStorage(StorageType.INSTRUCTION)
+    setPdfRecipeName(currentRecName)
     setPdfIngredients(currentIngr as IngredientItem[])
     setPdfInstructions(currentInst as InstructionItem[])
   }
@@ -23,6 +29,7 @@ const Preview = (): JSX.Element => {
       <button onClick={getStorage}>Render</button>
       <PDFViewer>
         <PreviewPDF
+          pdfRecipeName={pdfRecipeName}
           pdfIngredients={pdfIngredients}
           pdfInstructions={pdfInstructions}
         />

@@ -52,11 +52,13 @@ const styles = StyleSheet.create({
 })
 
 type PreviewPDFProps = {
+  pdfRecipeName: string
   pdfIngredients: IngredientItem[]
   pdfInstructions: InstructionItem[]
 }
 
 const PreviewPDF = ({
+  pdfRecipeName,
   pdfIngredients,
   pdfInstructions,
 }: PreviewPDFProps): JSX.Element => {
@@ -64,7 +66,7 @@ const PreviewPDF = ({
     <Document>
       <Page size="A4">
         <View style={styles.header}>
-          <Text style={styles.header_text}>Recipe Name</Text>
+          <Text style={styles.header_text}>{pdfRecipeName}</Text>
           <Image
             src={'https://react-pdf.org/images/og-banner.png'}
             style={styles.header_image}
