@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Image,
 } from '@react-pdf/renderer'
+import { IngredientItem, InstructionItem } from '../globalTypes'
 
 const styles = StyleSheet.create({
   header: {
@@ -38,26 +39,56 @@ const styles = StyleSheet.create({
     paddingHorizontal: 35,
     border: '2px solid black',
   },
-  ingredients: { border: '2px solid black', flex: 1 },
-  instructions: { border: '2px solid black', flex: 1 },
+  ingredients: {
+    border: '2px solid black',
+    flex: 1,
+    width: 400,
+  },
+  instructions: {
+    border: '2px solid black',
+    flex: 1,
+    width: 400,
+  },
 })
 
-const PreviewPDF = (): JSX.Element => (
-  <Document>
-    <Page size="A4">
-      <View style={styles.header}>
-        <Text style={styles.header_text}>Recipe Name</Text>
-        <Image
-          src={'https://react-pdf.org/images/og-banner.png'}
-          style={styles.header_image}
-        ></Image>
-      </View>
-      <View style={styles.content}>
-        <Text style={styles.ingredients}>Ingredients</Text>
-        <Text style={styles.instructions}>Instructions</Text>
-      </View>
-    </Page>
-  </Document>
-)
+type PreviewPDFProps = {
+  pdfIngredients: IngredientItem[]
+  pdfInstructions: InstructionItem[]
+}
+
+const PreviewPDF = ({
+  pdfIngredients,
+  pdfInstructions,
+}: PreviewPDFProps): JSX.Element => {
+  return (
+    <Document>
+      <Page size="A4">
+        <View style={styles.header}>
+          <Text style={styles.header_text}>Recipe Name</Text>
+          <Image
+            src={'https://react-pdf.org/images/og-banner.png'}
+            style={styles.header_image}
+          ></Image>
+        </View>
+        <View style={styles.content}>
+          <View style={styles.ingredients}>
+            {pdfIngredients.map((item, index) => (
+              <Text key={item.id}>
+                {index + 1}. {item.name} {item.amount} {item.unit}
+              </Text>
+            ))}
+          </View>
+          <View style={styles.instructions}>
+            {pdfInstructions.map((item, index) => (
+              <Text key={item.id}>
+                {index + 1}. {item.step}
+              </Text>
+            ))}
+          </View>
+        </View>
+      </Page>
+    </Document>
+  )
+}
 
 export default PreviewPDF
