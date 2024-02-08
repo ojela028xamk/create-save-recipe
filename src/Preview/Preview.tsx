@@ -8,6 +8,7 @@ import {
   getRecipeNameFromSessionStorage,
   getSessionStorage,
 } from '../Services/storageService'
+import { useEffectOnce } from 'react-use'
 
 const Preview = (): JSX.Element => {
   const [pdfRecipeName, setPdfRecipeName] = useState<string>('')
@@ -22,6 +23,10 @@ const Preview = (): JSX.Element => {
     setPdfIngredients(currentIngr as IngredientItem[])
     setPdfInstructions(currentInst as InstructionItem[])
   }
+
+  useEffectOnce(() => {
+    getStorage()
+  })
 
   return (
     <div className={css.preview}>
