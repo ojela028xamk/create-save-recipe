@@ -1,3 +1,4 @@
+// How to download web pages as PDF in React -> https://www.youtube.com/watch?v=QaZ2CoYFO60
 import { IngredientItem, InstructionItem } from '../globalTypes'
 import { useRef } from 'react'
 import html2canvas from 'html2canvas'
@@ -52,7 +53,9 @@ const PreviewPDF = ({
           <h2 className={css.header_text}>{pdfRecipeName}</h2>
           <Image
             className={css.header_image}
-            src={'https://react-pdf.org/images/og-banner.png'}
+            src={
+              'https://images.pexels.com/photos/566345/pexels-photo-566345.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
+            }
           />
         </div>
         <div className={css.content}>
