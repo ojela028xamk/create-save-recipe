@@ -32,10 +32,10 @@ const PreviewPDF = ({
         const imgHeight = canvas.height
         const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight)
         const imgX = (pdfWidth - imgWidth * ratio) / 2
-        const imgY = 30
+        const imgY = 0
         pdf.addImage(
           imgData,
-          'PNG',
+          'png',
           imgX,
           imgY,
           imgWidth * ratio,
@@ -62,9 +62,9 @@ const PreviewPDF = ({
           <div className={css.ingredients}>
             <h4>Ingredients</h4>
             <ul>
-              {pdfIngredients.map((item, index) => (
+              {pdfIngredients.map((item) => (
                 <li key={item.id}>
-                  {index + 1}. {item.name} {item.amount} {item.unit}
+                  {item.name} {item.amount} {item.unit}
                 </li>
               ))}
             </ul>
