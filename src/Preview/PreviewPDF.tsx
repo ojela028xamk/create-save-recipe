@@ -3,7 +3,7 @@ import { IngredientItem, InstructionItem } from '../globalTypes'
 import { useRef } from 'react'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
-import { Image } from 'react-bootstrap'
+import { Button, Image } from 'react-bootstrap'
 import css from './Preview.module.scss'
 
 type PreviewPDFProps = {
@@ -23,7 +23,7 @@ const PreviewPDF = ({
     const input = pdfRef.current
 
     if (input) {
-      html2canvas(input).then((canvas) => {
+      html2canvas(input, { useCORS: true }).then((canvas) => {
         const imgData = canvas.toDataURL('image/png')
         const pdf = new jsPDF('p', 'mm', 'a4', true)
         const pdfWidth = pdf.internal.pageSize.getWidth()
@@ -48,6 +48,9 @@ const PreviewPDF = ({
 
   return (
     <>
+      <Button onClick={downloadPDF}>
+        <span>Save PDF</span> <i className="bi bi-file-earmark-pdf"></i>
+      </Button>
       <div className={css.preview_pdf} ref={pdfRef}>
         <div className={css.header}>
           <h2 className={css.header_text}>{pdfRecipeName}</h2>
@@ -81,7 +84,6 @@ const PreviewPDF = ({
           </div>
         </div>
       </div>
-      <button onClick={downloadPDF}>Save pdf!</button>
     </>
   )
 }

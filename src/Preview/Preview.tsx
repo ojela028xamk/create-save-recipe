@@ -7,6 +7,7 @@ import {
   getSessionStorage,
 } from '../Services/storageService'
 import { useEffectOnce } from 'react-use'
+import { Button } from 'react-bootstrap'
 
 const Preview = (): JSX.Element => {
   const [pdfRecipeName, setPdfRecipeName] = useState<string>('')
@@ -28,13 +29,13 @@ const Preview = (): JSX.Element => {
 
   return (
     <div className={css.preview}>
-      <h3>Preview</h3>
+      <h1>Preview</h1>
+      <Button onClick={getStorage}>Render</Button>
       <PreviewPDF
         pdfRecipeName={pdfRecipeName}
         pdfIngredients={pdfIngredients}
         pdfInstructions={pdfInstructions}
       />
-      <button onClick={getStorage}>Render</button>
     </div>
   )
 }
