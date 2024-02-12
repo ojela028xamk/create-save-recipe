@@ -1,13 +1,13 @@
-// https://react-pdf.org/
 import { JSX, useState } from 'react'
 import css from './Preview.module.scss'
-import { PDFViewer } from '@react-pdf/renderer'
 import PreviewPDF from './PreviewPDF'
 import { IngredientItem, InstructionItem, StorageType } from '../globalTypes'
 import {
   getRecipeNameFromSessionStorage,
   getSessionStorage,
 } from '../Services/storageService'
+import { useEffectOnce } from 'react-use'
+import { Button } from 'react-bootstrap'
 
 const Preview = (): JSX.Element => {
   const [pdfRecipeName, setPdfRecipeName] = useState<string>('')
@@ -23,21 +23,19 @@ const Preview = (): JSX.Element => {
     setPdfInstructions(currentInst as InstructionItem[])
   }
 
+  useEffectOnce(() => {
+    getStorage()
+  })
+
   return (
     <div className={css.preview}>
-      <h3>Preview</h3>
-      <button onClick={getStorage}>Render</button>
-      <PDFViewer>
-        <PreviewPDF
-          pdfRecipeName={pdfRecipeName}
-          pdfIngredients={pdfIngredients}
-          pdfInstructions={pdfInstructions}
-        />
-      </PDFViewer>
-      <br />
-      {/* <PDFDownloadLink document={<PreviewPDF />} fileName="testi.pdf">
-        {({ loading }) => (loading ? 'Loading document...' : 'Download PDF')}
-      </PDFDownloadLink> */}
+      <h1>Preview</h1>
+      <Button onClick={getStorage}>Render</Button>
+      <PreviewPDF
+        pdfRecipeName={pdfRecipeName}
+        pdfIngredients={pdfIngredients}
+        pdfInstructions={pdfInstructions}
+      />
     </div>
   )
 }
