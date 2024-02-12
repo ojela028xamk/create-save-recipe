@@ -1,5 +1,13 @@
 .recipe_name {
     border: 2px solid black;
+    box-shadow: 10px 10px 0px 0px #fe5000ff;
+
+    h1 {
+        background-color: #121212ff;
+        color: #fefefeff;
+        font-family: 'Montserrat', sans-serif;
+        padding: 0.2em;
+    }
 
     .recipe_name_form {
         display: flex;
@@ -7,6 +15,15 @@
 
         button {
             margin-left: 1em;
+            background-color: #fe5000ff;
+            border: 2px solid #fe5000ff;
         }
+
+        button:hover {
+            color: #fe5000ff;
+            background-color: white;
+            border: 2px solid #fe5000ff;
+        }
+
     }
 }
