@@ -29,7 +29,7 @@ const RecipeName = (): JSX.Element => {
 
   return (
     <div className={css.recipe_name}>
-      <h1>Recipe Name</h1>
+      <h2>Recipe Name</h2>
       <Form
         className={css.recipe_name_form}
         noValidate

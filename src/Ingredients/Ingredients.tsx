@@ -62,7 +62,7 @@ const Ingredients = (): JSX.Element => {
 
   return (
     <div className={css.ingredients}>
-      <h1>Ingredients</h1>
+      <h2>Ingredients</h2>
       <div className={css.ingredients_add}>
         <Form
           noValidate
