@@ -1,10 +1,12 @@
+@import '../variables';
+
 .recipe_name {
-    border: 2px solid black;
-    box-shadow: 8px 8px 0px 0px #fe5000ff;
+    border: 2px solid $black;
+    box-shadow: 8px 8px 0px 0px $orange;
 
     h2 {
-        background-color: #121212ff;
-        color: #fefefeff;
+        background-color: $black;
+        color: $white;
         font-family: 'Montserrat', sans-serif;
         padding: 0.2em;
     }
@@ -15,14 +17,14 @@
 
         button {
             margin-left: 1em;
-            background-color: #fe5000ff;
-            border: 2px solid #fe5000ff;
+            background-color: $orange;
+            border: 2px solid $orange;
         }
 
         button:hover {
-            color: #fe5000ff;
-            background-color: white;
-            border: 2px solid #fe5000ff;
+            color: $orange;
+            background-color: $white;
+            border: 2px solid $orange;
         }
 
     }
