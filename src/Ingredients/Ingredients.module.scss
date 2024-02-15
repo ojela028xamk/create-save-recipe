@@ -1,4 +1,37 @@
 .ingredients {
     border: 2px solid black;
-    padding: 0.5em;
+    box-shadow: 8px 8px 0px 0px #fe5000ff;
+
+    h2 { 
+        background-color: #121212ff;
+        color: #fefefeff;
+        font-family: 'Montserrat', sans-serif;
+        padding: 0.2em;
+    }
+
+    .ingredients_add, .ingredients_list {
+        padding: 1em;
+    }
+
+    .ingredients_add {
+        button {
+            border: 2px solid #fe5000ff;
+            background-color: #fe5000ff;
+            margin: 0.4em;
+        }
+        
+        button:hover {
+            border: 2px solid #fe5000ff;
+            background-color: #fefefeff;
+            color: #fe5000ff;
+        }
+    }
+
+    .ingredients_list {
+        th {
+            color: white;
+            background-color: black;
+        }
+    }
+
 }

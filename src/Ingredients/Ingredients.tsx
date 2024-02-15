@@ -62,8 +62,8 @@ const Ingredients = (): JSX.Element => {
 
   return (
     <div className={css.ingredients}>
+      <h2>Ingredients</h2>
       <div className={css.ingredients_add}>
-        <h3>Ingredients</h3>
         <Form
           noValidate
           validated={showValidated}
@@ -107,9 +107,8 @@ const Ingredients = (): JSX.Element => {
           </Button>
         </Form>
       </div>
-      <br />
       <div className={css.ingredients_list}>
-        <Table striped bordered hover>
+        <Table striped bordered>
           <thead>
             <tr>
               <th>Name</th>
@@ -124,10 +123,10 @@ const Ingredients = (): JSX.Element => {
             {ingredientList && ingredientList.length ? (
               ingredientList.map((item) => (
                 <tr key={item.id}>
-                  <th>{item.name}</th>
-                  <th>{item.amount}</th>
-                  <th>{item.unit}</th>
-                  <th>
+                  <td>{item.name}</td>
+                  <td>{item.amount}</td>
+                  <td>{item.unit}</td>
+                  <td>
                     <Button
                       variant="outline-danger"
                       size="sm"
@@ -135,12 +134,12 @@ const Ingredients = (): JSX.Element => {
                     >
                       X
                     </Button>
-                  </th>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <th colSpan={4}>No ingredients...</th>
+                <td colSpan={4}>No ingredients...</td>
               </tr>
             )}
           </tbody>

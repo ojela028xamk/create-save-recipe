@@ -29,7 +29,7 @@ const RecipeName = (): JSX.Element => {
 
   return (
     <div className={css.recipe_name}>
-      <h3>Recipe Name</h3>
+      <h2>Recipe Name</h2>
       <Form
         className={css.recipe_name_form}
         noValidate
@@ -47,7 +47,6 @@ const RecipeName = (): JSX.Element => {
           <i className="bi bi-check"></i>
         </Button>
       </Form>
-      <br />
     </div>
   )
 }

@@ -29,7 +29,7 @@ const Preview = (): JSX.Element => {
 
   return (
     <div className={css.preview}>
-      <h1>Preview</h1>
+      <h2>Preview</h2>
       <Button onClick={getStorage}>Render</Button>
       <PreviewPDF
         pdfRecipeName={pdfRecipeName}
