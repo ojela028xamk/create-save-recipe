@@ -50,8 +50,8 @@ const Instructions = (): JSX.Element => {
 
   return (
     <div className={css.instructions}>
+      <h2>Instructions</h2>
       <div className={css.instructions_add}>
-        <h3>Instructions</h3>
         <Form
           noValidate
           validated={showValidated}
