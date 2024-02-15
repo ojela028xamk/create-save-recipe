@@ -13,4 +13,25 @@
         padding: 1em;
     }
 
+    .ingredients_add {
+        button {
+            border: 2px solid #fe5000ff;
+            background-color: #fe5000ff;
+            margin: 0.4em;
+        }
+        
+        button:hover {
+            border: 2px solid #fe5000ff;
+            background-color: #fefefeff;
+            color: #fe5000ff;
+        }
+    }
+
+    .ingredients_list {
+        th {
+            color: white;
+            background-color: black;
+        }
+    }
+
 }

@@ -53,7 +53,7 @@ const PreviewPDF = ({
       </Button>
       <div className={css.preview_pdf} ref={pdfRef}>
         <div className={css.header}>
-          <h2 className={css.header_text}>{pdfRecipeName}</h2>
+          <h1 className={css.header_text}>{pdfRecipeName}</h1>
           <Image
             className={css.header_image}
             src={
