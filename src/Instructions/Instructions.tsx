@@ -1,6 +1,6 @@
 import { FormEvent, JSX, useState } from 'react'
 import css from './Instructions.module.scss'
-import { Button, Form, ListGroup } from 'react-bootstrap'
+import { Alert, Button, Form, ListGroup } from 'react-bootstrap'
 import { useEffectOnce } from 'react-use'
 import { InstructionItem, StorageType } from '../globalTypes'
 import { getSessionStorage } from '../Services/storageService'
@@ -50,14 +50,14 @@ const Instructions = (): JSX.Element => {
 
   return (
     <div className={css.instructions}>
+      <h2>Instructions</h2>
       <div className={css.instructions_add}>
-        <h3>Instructions</h3>
         <Form
           noValidate
           validated={showValidated}
           onSubmit={(event) => handleNewInstruction(event)}
         >
-          <Form.Label>Instruction</Form.Label>
+          <Form.Label>Instruction Step</Form.Label>
           <Form.Control
             required
             type="text"
@@ -71,13 +71,16 @@ const Instructions = (): JSX.Element => {
           </Button>
         </Form>
       </div>
-      <br />
       <div className={css.instructions_list}>
         {instructionList && instructionList.length ? (
           <ListGroup as="ol" numbered>
             {instructionList.map((instruction) => (
-              <ListGroup.Item key={instruction.id} as="li">
-                {instruction.step}{' '}
+              <ListGroup.Item
+                key={instruction.id}
+                as="li"
+                className="d-flex justify-content-between align-items-start"
+              >
+                <span>{instruction.step}</span>
                 <Button
                   variant="outline-danger"
                   size="sm"
@@ -89,7 +92,7 @@ const Instructions = (): JSX.Element => {
             ))}
           </ListGroup>
         ) : (
-          <h5>No instructions...</h5>
+          <Alert variant="secondary">No instructions...</Alert>
         )}
       </div>
     </div>
