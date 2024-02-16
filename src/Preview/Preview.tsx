@@ -10,7 +10,7 @@ import { Button } from 'react-bootstrap'
 import { useRecipeData } from '../AppContainer'
 
 const Preview = (): JSX.Element => {
-  const [{ recipeName }] = useRecipeData()
+  const [{ recipeName, recipeIngredients }] = useRecipeData()
 
   const [pdfRecipeName, setPdfRecipeName] = useState<string>('')
   const [pdfIngredients, setPdfIngredients] = useState<IngredientItem[]>([])
@@ -27,6 +27,11 @@ const Preview = (): JSX.Element => {
     const currentRecName = getRecipeNameFromSessionStorage()
     setPdfRecipeName(currentRecName)
   }, [recipeName])
+
+  useEffect(() => {
+    const currentIngr = getSessionStorage(StorageType.INGREDIENT)
+    setPdfIngredients(currentIngr as IngredientItem[])
+  }, [recipeIngredients])
 
   return (
     <div className={css.preview}>

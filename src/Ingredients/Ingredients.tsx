@@ -8,8 +8,10 @@ import {
   StorageType,
 } from '../globalTypes'
 import { getSessionStorage } from '../Services/storageService'
+import { useRecipeData } from '../AppContainer'
 
 const Ingredients = (): JSX.Element => {
+  const [{ recipeIngredients }, setRecipeData] = useRecipeData()
   const [ingredientName, setIngredientName] = useState<string>('')
   const [ingredientAmount, setIngredientAmount] = useState<number>(0)
   const [ingredientUnit, setIngredientUnit] = useState<
@@ -21,6 +23,10 @@ const Ingredients = (): JSX.Element => {
   const getIngredientList = (): void => {
     const storageIngredients = getSessionStorage(StorageType.INGREDIENT)
     setIngredientList(storageIngredients as IngredientItem[])
+    setRecipeData((prev) => ({
+      ...prev,
+      recipeIngredients: storageIngredients as IngredientItem[],
+    }))
   }
 
   const handleDeleteIngredient = (ingredientId: string): void => {
@@ -51,6 +57,10 @@ const Ingredients = (): JSX.Element => {
     }
 
     sessionStorage.setItem(newIngredient.id, JSON.stringify(newIngredient))
+    setRecipeData((prev) => ({
+      ...prev,
+      recipeIngredients: [...recipeIngredients, newIngredient],
+    }))
     setShowValidated(false)
     setIngredientName('')
     getIngredientList()
