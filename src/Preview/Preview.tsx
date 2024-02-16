@@ -1,4 +1,4 @@
-import { JSX, useState } from 'react'
+import { JSX, useEffect, useState } from 'react'
 import css from './Preview.module.scss'
 import PreviewPDF from './PreviewPDF'
 import { IngredientItem, InstructionItem, StorageType } from '../globalTypes'
@@ -6,26 +6,27 @@ import {
   getRecipeNameFromSessionStorage,
   getSessionStorage,
 } from '../Services/storageService'
-import { useEffectOnce } from 'react-use'
 import { Button } from 'react-bootstrap'
+import { useRecipeData } from '../AppContainer'
 
 const Preview = (): JSX.Element => {
+  const [{ recipeName }] = useRecipeData()
+
   const [pdfRecipeName, setPdfRecipeName] = useState<string>('')
   const [pdfIngredients, setPdfIngredients] = useState<IngredientItem[]>([])
   const [pdfInstructions, setPdfInstructions] = useState<InstructionItem[]>([])
 
   const getStorage = (): void => {
-    const currentRecName = getRecipeNameFromSessionStorage()
     const currentIngr = getSessionStorage(StorageType.INGREDIENT)
     const currentInst = getSessionStorage(StorageType.INSTRUCTION)
-    setPdfRecipeName(currentRecName)
     setPdfIngredients(currentIngr as IngredientItem[])
     setPdfInstructions(currentInst as InstructionItem[])
   }
 
-  useEffectOnce(() => {
-    getStorage()
-  })
+  useEffect(() => {
+    const currentRecName = getRecipeNameFromSessionStorage()
+    setPdfRecipeName(currentRecName)
+  }, [recipeName])
 
   return (
     <div className={css.preview}>
