@@ -4,8 +4,10 @@ import { Alert, Button, Form, ListGroup } from 'react-bootstrap'
 import { useEffectOnce } from 'react-use'
 import { InstructionItem, StorageType } from '../globalTypes'
 import { getSessionStorage } from '../Services/storageService'
+import { useRecipeData } from '../AppContainer'
 
 const Instructions = (): JSX.Element => {
+  const [{ recipeInstructions }, setRecipeData] = useRecipeData()
   const [instructionStep, setInstructionStep] = useState<string>('')
   const [instructionList, setInstructionList] = useState<InstructionItem[]>([])
   const [showValidated, setShowValidated] = useState<boolean>(false)
@@ -13,6 +15,10 @@ const Instructions = (): JSX.Element => {
   const getInstructionList = (): void => {
     const storageInstructions = getSessionStorage(StorageType.INSTRUCTION)
     setInstructionList(storageInstructions as InstructionItem[])
+    setRecipeData((prev) => ({
+      ...prev,
+      recipeInstructions: storageInstructions as InstructionItem[],
+    }))
   }
 
   const getId = (): string => {
@@ -27,13 +33,17 @@ const Instructions = (): JSX.Element => {
       return
     }
 
-    const newIngredient: InstructionItem = {
+    const newInstruction: InstructionItem = {
       id: getId(),
       step: instructionStep,
       storageType: StorageType.INSTRUCTION,
     }
 
-    sessionStorage.setItem(newIngredient.id, JSON.stringify(newIngredient))
+    sessionStorage.setItem(newInstruction.id, JSON.stringify(newInstruction))
+    setRecipeData((prev) => ({
+      ...prev,
+      recipeInstructions: [...recipeInstructions, newInstruction],
+    }))
     setShowValidated(false)
     setInstructionStep('')
     getInstructionList()
