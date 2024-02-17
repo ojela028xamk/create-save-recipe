@@ -15,8 +15,11 @@ export type RecipeNameValue = {
 }
 
 export enum IngredientUnitValue {
+  AMOUNT = 'amount',
   GRAM = 'g',
   MILLILITRE = 'ml',
+  TEASPOON = 'tsp',
+  TABLESPOON = 'tbsp',
 }
 
 export type IngredientItem = {
