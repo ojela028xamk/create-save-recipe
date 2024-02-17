@@ -1,3 +1,9 @@
+export type RecipeDataContext = {
+  recipeName: RecipeNameValue
+  recipeIngredients: IngredientItem[]
+  recipeInstructions: InstructionItem[]
+}
+
 export enum StorageType {
   INGREDIENT = 'Ingredient',
   INSTRUCTION = 'Instruction',

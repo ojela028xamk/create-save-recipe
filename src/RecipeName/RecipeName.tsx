@@ -2,9 +2,11 @@ import { Button, Form } from 'react-bootstrap'
 import css from './RecipeName.module.scss'
 import { useState } from 'react'
 import { RecipeNameValue } from '../globalTypes'
+import { useRecipeData } from '../AppContainer'
 
 const RecipeName = (): JSX.Element => {
-  const [recipeName, setRecipeName] = useState<string>('')
+  const setRecipeData = useRecipeData()[1]
+  const [recipeNameValue, setRecipeNameValue] = useState<string>('')
   const [showValidated, setShowValidated] = useState<boolean>(false)
 
   const handleNewRecipeName = (
@@ -19,12 +21,16 @@ const RecipeName = (): JSX.Element => {
 
     const newRecipeName: RecipeNameValue = {
       id: 'recipeNameStorage',
-      recipe_name: recipeName,
+      recipe_name: recipeNameValue,
     }
 
     sessionStorage.setItem(newRecipeName.id, JSON.stringify(newRecipeName))
+    setRecipeData((prev) => ({
+      ...prev,
+      recipeName: newRecipeName,
+    }))
     setShowValidated(false)
-    setRecipeName('')
+    setRecipeNameValue('')
   }
 
   return (
@@ -39,9 +45,9 @@ const RecipeName = (): JSX.Element => {
         <Form.Control
           required
           type="text"
-          value={recipeName}
+          value={recipeNameValue}
           placeholder="Recipe name..."
-          onChange={(event) => setRecipeName(event.currentTarget.value)}
+          onChange={(event) => setRecipeNameValue(event.currentTarget.value)}
         ></Form.Control>
         <Button type="submit" variant="success">
           <i className="bi bi-check"></i>

@@ -1,32 +1,21 @@
 import { JSX, useState } from 'react'
 import { Button, Form, Table } from 'react-bootstrap'
 import css from './Ingredients.module.scss'
-import { useEffectOnce } from 'react-use'
 import {
   IngredientItem,
   IngredientUnitValue,
   StorageType,
 } from '../globalTypes'
-import { getSessionStorage } from '../Services/storageService'
+import { useRecipeData } from '../AppContainer'
 
 const Ingredients = (): JSX.Element => {
+  const [{ recipeIngredients }, setRecipeData] = useRecipeData()
   const [ingredientName, setIngredientName] = useState<string>('')
   const [ingredientAmount, setIngredientAmount] = useState<number>(0)
   const [ingredientUnit, setIngredientUnit] = useState<
     IngredientUnitValue | string
   >('')
-  const [ingredientList, setIngredientList] = useState<IngredientItem[]>([])
   const [showValidated, setShowValidated] = useState<boolean>(false)
-
-  const getIngredientList = (): void => {
-    const storageIngredients = getSessionStorage(StorageType.INGREDIENT)
-    setIngredientList(storageIngredients as IngredientItem[])
-  }
-
-  const handleDeleteIngredient = (ingredientId: string): void => {
-    sessionStorage.removeItem(ingredientId)
-    getIngredientList()
-  }
 
   const getId = (): string => {
     return Date.now().toString(36)
@@ -51,14 +40,23 @@ const Ingredients = (): JSX.Element => {
     }
 
     sessionStorage.setItem(newIngredient.id, JSON.stringify(newIngredient))
+    setRecipeData((prev) => ({
+      ...prev,
+      recipeIngredients: [...recipeIngredients, newIngredient],
+    }))
     setShowValidated(false)
     setIngredientName('')
-    getIngredientList()
   }
 
-  useEffectOnce(() => {
-    getIngredientList()
-  })
+  const handleDeleteIngredient = (ingredientId: string): void => {
+    sessionStorage.removeItem(ingredientId)
+    setRecipeData((prev) => ({
+      ...prev,
+      recipeIngredients: recipeIngredients.filter(
+        (ingredient) => ingredient.id !== ingredientId
+      ),
+    }))
+  }
 
   return (
     <div className={css.ingredients}>
@@ -120,8 +118,8 @@ const Ingredients = (): JSX.Element => {
             </tr>
           </thead>
           <tbody>
-            {ingredientList && ingredientList.length ? (
-              ingredientList.map((item) => (
+            {recipeIngredients && recipeIngredients.length ? (
+              recipeIngredients.map((item) => (
                 <tr key={item.id}>
                   <td>{item.name}</td>
                   <td>{item.amount}</td>
