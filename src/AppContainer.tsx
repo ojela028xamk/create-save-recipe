@@ -1,10 +1,18 @@
 import { createStateContext, useEffectOnce } from 'react-use'
-import { InstructionItem, RecipeDataContext, StorageType } from './globalTypes'
+import {
+  IngredientItem,
+  InstructionItem,
+  RecipeDataContext,
+  StorageType,
+} from './globalTypes'
 import RecipeName from './RecipeName/RecipeName'
 import Ingredients from './Ingredients/Ingredients'
 import Instructions from './Instructions/Instructions'
 import Preview from './Preview/Preview'
-import { getSessionStorage } from './Services/storageService'
+import {
+  getRecipeNameFromSessionStorage,
+  getSessionStorage,
+} from './Services/storageService'
 
 export const [useRecipeData, RecipeDataProvider] =
   createStateContext<RecipeDataContext>({
@@ -20,9 +28,16 @@ const AppContainer = (): JSX.Element => {
   const setRecipeData = useRecipeData()[1]
 
   useEffectOnce(() => {
+    const storageRecipeName = getRecipeNameFromSessionStorage()
+    const storageIngredients = getSessionStorage(StorageType.INGREDIENT)
     const storageInstructions = getSessionStorage(StorageType.INSTRUCTION)
     setRecipeData((prev) => ({
       ...prev,
+      recipeName: {
+        id: 'recipeNameStorage',
+        recipe_name: storageRecipeName,
+      },
+      recipeIngredients: storageIngredients as IngredientItem[],
       recipeInstructions: storageInstructions as InstructionItem[],
     }))
   })
