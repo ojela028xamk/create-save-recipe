@@ -21,22 +21,25 @@ const getRecipeNameFromSessionStorage = (): string => {
 const getSessionStorage = (
   type: StorageType
 ): IngredientItem[] | InstructionItem[] => {
-  const storageKeys = Object.keys(sessionStorage)
-  const storageList: IngredientItem[] | InstructionItem[] = []
+  if (type === StorageType.INGREDIENT) {
+    const storageIngredientsArr = sessionStorage.getItem('ingredientsArr')
 
-  for (const key of storageKeys) {
-    const storageItem = sessionStorage.getItem(key)
-
-    if (storageItem) {
-      const parsedStorageItem = JSON.parse(storageItem)
-
-      if (parsedStorageItem.storageType === type) {
-        storageList.push(parsedStorageItem)
-      }
+    if (storageIngredientsArr) {
+      const parsedIngredientsArr = JSON.parse(storageIngredientsArr)
+      return parsedIngredientsArr
     }
   }
 
-  return storageList
+  if (type === StorageType.INSTRUCTION) {
+    const storageInstructionsArr = sessionStorage.getItem('instructionsArr')
+
+    if (storageInstructionsArr) {
+      const parsedInstructionsArr = JSON.parse(storageInstructionsArr)
+      return parsedInstructionsArr
+    }
+  }
+
+  return []
 }
 
 export { getRecipeNameFromSessionStorage, getSessionStorage }

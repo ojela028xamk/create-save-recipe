@@ -1,11 +1,7 @@
 import { JSX, useState } from 'react'
 import { Button, Form, Table } from 'react-bootstrap'
 import css from './Ingredients.module.scss'
-import {
-  IngredientItem,
-  IngredientUnitValue,
-  StorageType,
-} from '../globalTypes'
+import { IngredientItem, IngredientUnitValue } from '../globalTypes'
 import { useRecipeData } from '../AppContainer'
 
 const Ingredients = (): JSX.Element => {
@@ -36,25 +32,32 @@ const Ingredients = (): JSX.Element => {
       name: ingredientName,
       amount: ingredientAmount,
       unit: ingredientUnit,
-      storageType: StorageType.INGREDIENT,
     }
 
-    sessionStorage.setItem(newIngredient.id, JSON.stringify(newIngredient))
+    const currentIngredients = [...recipeIngredients, newIngredient]
+
+    sessionStorage.setItem('ingredientsArr', JSON.stringify(currentIngredients))
     setRecipeData((prev) => ({
       ...prev,
-      recipeIngredients: [...recipeIngredients, newIngredient],
+      recipeIngredients: currentIngredients,
     }))
+
     setShowValidated(false)
     setIngredientName('')
   }
 
   const handleDeleteIngredient = (ingredientId: string): void => {
-    sessionStorage.removeItem(ingredientId)
+    const filteredIngredients = recipeIngredients.filter(
+      (ingredient) => ingredient.id !== ingredientId
+    )
+    sessionStorage.setItem(
+      'ingredientsArr',
+      JSON.stringify(filteredIngredients)
+    )
+
     setRecipeData((prev) => ({
       ...prev,
-      recipeIngredients: recipeIngredients.filter(
-        (ingredient) => ingredient.id !== ingredientId
-      ),
+      recipeIngredients: filteredIngredients,
     }))
   }
 

@@ -1,7 +1,7 @@
 import { FormEvent, JSX, useState } from 'react'
 import css from './Instructions.module.scss'
 import { Alert, Button, Form, ListGroup } from 'react-bootstrap'
-import { InstructionItem, StorageType } from '../globalTypes'
+import { InstructionItem } from '../globalTypes'
 import { useRecipeData } from '../AppContainer'
 
 const Instructions = (): JSX.Element => {
@@ -24,10 +24,14 @@ const Instructions = (): JSX.Element => {
     const newInstruction: InstructionItem = {
       id: getId(),
       step: instructionStep,
-      storageType: StorageType.INSTRUCTION,
     }
 
-    sessionStorage.setItem(newInstruction.id, JSON.stringify(newInstruction))
+    const currentInstructions = [...recipeInstructions, newInstruction]
+
+    sessionStorage.setItem(
+      'instructionsArr',
+      JSON.stringify(currentInstructions)
+    )
     setRecipeData((prev) => ({
       ...prev,
       recipeInstructions: [...recipeInstructions, newInstruction],
@@ -37,12 +41,17 @@ const Instructions = (): JSX.Element => {
   }
 
   const handleDeleteInstruction = (instructionId: string): void => {
-    sessionStorage.removeItem(instructionId)
+    const filteredInstructions = recipeInstructions.filter(
+      (instruction) => instruction.id !== instructionId
+    )
+    sessionStorage.setItem(
+      'instructionsArr',
+      JSON.stringify(filteredInstructions)
+    )
+
     setRecipeData((prev) => ({
       ...prev,
-      recipeInstructions: recipeInstructions.filter(
-        (instruction) => instruction.id !== instructionId
-      ),
+      recipeInstructions: filteredInstructions,
     }))
   }
 

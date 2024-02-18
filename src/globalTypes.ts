@@ -27,11 +27,9 @@ export type IngredientItem = {
   name: string
   amount: number
   unit: IngredientUnitValue | string
-  storageType: StorageType.INGREDIENT
 }
 
 export type InstructionItem = {
   id: string
   step: string
-  storageType: StorageType.INSTRUCTION
 }
