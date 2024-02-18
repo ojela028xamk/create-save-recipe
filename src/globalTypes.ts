@@ -1,17 +1,13 @@
 export type RecipeDataContext = {
-  recipeName: RecipeNameValue
+  recipeName: string
   recipeIngredients: IngredientItem[]
   recipeInstructions: InstructionItem[]
 }
 
 export enum StorageType {
+  RECIPE_NAME = 'Recipe Name',
   INGREDIENT = 'Ingredient',
   INSTRUCTION = 'Instruction',
-}
-
-export type RecipeNameValue = {
-  id: string
-  recipe_name: string
 }
 
 export enum IngredientUnitValue {

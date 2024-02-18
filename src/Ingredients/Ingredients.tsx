@@ -1,7 +1,11 @@
 import { JSX, useState } from 'react'
 import { Button, Form, Table } from 'react-bootstrap'
 import css from './Ingredients.module.scss'
-import { IngredientItem, IngredientUnitValue } from '../globalTypes'
+import {
+  IngredientItem,
+  IngredientUnitValue,
+  StorageType,
+} from '../globalTypes'
 import { useRecipeData } from '../AppContainer'
 
 const Ingredients = (): JSX.Element => {
@@ -36,7 +40,10 @@ const Ingredients = (): JSX.Element => {
 
     const currentIngredients = [...recipeIngredients, newIngredient]
 
-    sessionStorage.setItem('ingredientsArr', JSON.stringify(currentIngredients))
+    sessionStorage.setItem(
+      StorageType.INGREDIENT,
+      JSON.stringify(currentIngredients)
+    )
     setRecipeData((prev) => ({
       ...prev,
       recipeIngredients: currentIngredients,
@@ -51,7 +58,7 @@ const Ingredients = (): JSX.Element => {
       (ingredient) => ingredient.id !== ingredientId
     )
     sessionStorage.setItem(
-      'ingredientsArr',
+      StorageType.INGREDIENT,
       JSON.stringify(filteredIngredients)
     )
 

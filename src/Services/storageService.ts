@@ -1,45 +1,16 @@
-import {
-  IngredientItem,
-  InstructionItem,
-  RecipeNameValue,
-  StorageType,
-} from '../globalTypes'
-
-const getRecipeNameFromSessionStorage = (): string => {
-  const storageRecipeName = sessionStorage.getItem('recipeNameStorage')
-
-  if (storageRecipeName) {
-    const parsedStorageRecipeName = JSON.parse(
-      storageRecipeName
-    ) as RecipeNameValue
-    return parsedStorageRecipeName.recipe_name
-  } else {
-    return ''
-  }
-}
+import { IngredientItem, InstructionItem, StorageType } from '../globalTypes'
 
 const getSessionStorage = (
   type: StorageType
-): IngredientItem[] | InstructionItem[] => {
-  if (type === StorageType.INGREDIENT) {
-    const storageIngredientsArr = sessionStorage.getItem('ingredientsArr')
+): IngredientItem[] | InstructionItem[] | string | null => {
+  const storageItem = sessionStorage.getItem(type)
 
-    if (storageIngredientsArr) {
-      const parsedIngredientsArr = JSON.parse(storageIngredientsArr)
-      return parsedIngredientsArr
-    }
+  if (storageItem) {
+    const parsedStorageItem = JSON.parse(storageItem)
+    return parsedStorageItem
   }
 
-  if (type === StorageType.INSTRUCTION) {
-    const storageInstructionsArr = sessionStorage.getItem('instructionsArr')
-
-    if (storageInstructionsArr) {
-      const parsedInstructionsArr = JSON.parse(storageInstructionsArr)
-      return parsedInstructionsArr
-    }
-  }
-
-  return []
+  return null
 }
 
-export { getRecipeNameFromSessionStorage, getSessionStorage }
+export { getSessionStorage }

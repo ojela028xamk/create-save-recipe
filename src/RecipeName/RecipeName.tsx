@@ -1,7 +1,7 @@
 import { Button, Form } from 'react-bootstrap'
 import css from './RecipeName.module.scss'
 import { useEffect, useState } from 'react'
-import { RecipeNameValue } from '../globalTypes'
+import { StorageType } from '../globalTypes'
 import { useRecipeData } from '../AppContainer'
 
 const RecipeName = (): JSX.Element => {
@@ -11,7 +11,7 @@ const RecipeName = (): JSX.Element => {
   const [showValidated, setShowValidated] = useState<boolean>(false)
 
   useEffect(() => {
-    setRecipeNameValue(recipeName.recipe_name)
+    setRecipeNameValue(recipeName)
   }, [recipeName])
 
   const handleNewRecipeName = (
@@ -24,15 +24,13 @@ const RecipeName = (): JSX.Element => {
       return
     }
 
-    const newRecipeName: RecipeNameValue = {
-      id: 'recipeNameStorage',
-      recipe_name: recipeNameValue,
-    }
-
-    sessionStorage.setItem(newRecipeName.id, JSON.stringify(newRecipeName))
+    sessionStorage.setItem(
+      StorageType.RECIPE_NAME,
+      JSON.stringify(recipeNameValue)
+    )
     setRecipeData((prev) => ({
       ...prev,
-      recipeName: newRecipeName,
+      recipeName: recipeNameValue,
     }))
 
     setShowValidated(false)
