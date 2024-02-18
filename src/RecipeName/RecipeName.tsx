@@ -1,13 +1,18 @@
 import { Button, Form } from 'react-bootstrap'
 import css from './RecipeName.module.scss'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { RecipeNameValue } from '../globalTypes'
 import { useRecipeData } from '../AppContainer'
 
 const RecipeName = (): JSX.Element => {
-  const setRecipeData = useRecipeData()[1]
+  const [{ recipeName }, setRecipeData] = useRecipeData()
   const [recipeNameValue, setRecipeNameValue] = useState<string>('')
+  const [isEditRecipeName, setIsEditRecipeName] = useState<boolean>(false)
   const [showValidated, setShowValidated] = useState<boolean>(false)
+
+  useEffect(() => {
+    setRecipeNameValue(recipeName.recipe_name)
+  }, [recipeName])
 
   const handleNewRecipeName = (
     event: React.FormEvent<HTMLFormElement>
@@ -29,8 +34,9 @@ const RecipeName = (): JSX.Element => {
       ...prev,
       recipeName: newRecipeName,
     }))
+
     setShowValidated(false)
-    setRecipeNameValue('')
+    setIsEditRecipeName(false)
   }
 
   return (
@@ -46,12 +52,20 @@ const RecipeName = (): JSX.Element => {
           required
           type="text"
           value={recipeNameValue}
-          placeholder="Recipe name..."
+          disabled={!isEditRecipeName}
+          placeholder="Add recipe name..."
           onChange={(event) => setRecipeNameValue(event.currentTarget.value)}
         ></Form.Control>
-        <Button type="submit" variant="success">
-          <i className="bi bi-check"></i>
-        </Button>
+        {isEditRecipeName && (
+          <Button type="submit">
+            <i className="bi bi-check"></i>
+          </Button>
+        )}
+        {!isEditRecipeName && (
+          <Button type="button" onClick={() => setIsEditRecipeName(true)}>
+            Edit <i className="bi bi-pen"></i>
+          </Button>
+        )}
       </Form>
     </div>
   )
