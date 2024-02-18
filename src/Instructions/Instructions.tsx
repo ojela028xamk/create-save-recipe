@@ -73,7 +73,7 @@ const Instructions = (): JSX.Element => {
             onChange={(event) => setInstructionStep(event.currentTarget.value)}
           ></Form.Control>
           <br />
-          <Button type="submit" variant="success">
+          <Button type="submit" variant="light">
             Add an instruction +
           </Button>
         </Form>

@@ -52,7 +52,7 @@ const PreviewPDF = ({
 
   return (
     <>
-      <Button onClick={downloadPDF}>
+      <Button variant="light" onClick={downloadPDF}>
         <span>Save PDF</span> <i className="bi bi-file-earmark-pdf"></i>
       </Button>
       <div className={css.preview_pdf} ref={pdfRef}>

@@ -110,7 +110,7 @@ const Ingredients = (): JSX.Element => {
             ))}
           </Form.Select>
           <br />
-          <Button type="submit" variant="success">
+          <Button type="submit" variant="light">
             Add an ingredient +
           </Button>
         </Form>
