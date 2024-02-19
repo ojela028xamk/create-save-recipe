@@ -24,10 +24,14 @@ const Instructions = (): JSX.Element => {
     const newInstruction: InstructionItem = {
       id: getId(),
       step: instructionStep,
-      storageType: StorageType.INSTRUCTION,
     }
 
-    sessionStorage.setItem(newInstruction.id, JSON.stringify(newInstruction))
+    const currentInstructions = [...recipeInstructions, newInstruction]
+
+    sessionStorage.setItem(
+      StorageType.INSTRUCTION,
+      JSON.stringify(currentInstructions)
+    )
     setRecipeData((prev) => ({
       ...prev,
       recipeInstructions: [...recipeInstructions, newInstruction],
@@ -37,12 +41,17 @@ const Instructions = (): JSX.Element => {
   }
 
   const handleDeleteInstruction = (instructionId: string): void => {
-    sessionStorage.removeItem(instructionId)
+    const filteredInstructions = recipeInstructions.filter(
+      (instruction) => instruction.id !== instructionId
+    )
+    sessionStorage.setItem(
+      StorageType.INSTRUCTION,
+      JSON.stringify(filteredInstructions)
+    )
+
     setRecipeData((prev) => ({
       ...prev,
-      recipeInstructions: recipeInstructions.filter(
-        (instruction) => instruction.id !== instructionId
-      ),
+      recipeInstructions: filteredInstructions,
     }))
   }
 
@@ -64,7 +73,7 @@ const Instructions = (): JSX.Element => {
             onChange={(event) => setInstructionStep(event.currentTarget.value)}
           ></Form.Control>
           <br />
-          <Button type="submit" variant="success">
+          <Button type="submit" variant="light">
             Add an instruction +
           </Button>
         </Form>

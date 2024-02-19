@@ -36,25 +36,35 @@ const Ingredients = (): JSX.Element => {
       name: ingredientName,
       amount: ingredientAmount,
       unit: ingredientUnit,
-      storageType: StorageType.INGREDIENT,
     }
 
-    sessionStorage.setItem(newIngredient.id, JSON.stringify(newIngredient))
+    const currentIngredients = [...recipeIngredients, newIngredient]
+
+    sessionStorage.setItem(
+      StorageType.INGREDIENT,
+      JSON.stringify(currentIngredients)
+    )
     setRecipeData((prev) => ({
       ...prev,
-      recipeIngredients: [...recipeIngredients, newIngredient],
+      recipeIngredients: currentIngredients,
     }))
+
     setShowValidated(false)
     setIngredientName('')
   }
 
   const handleDeleteIngredient = (ingredientId: string): void => {
-    sessionStorage.removeItem(ingredientId)
+    const filteredIngredients = recipeIngredients.filter(
+      (ingredient) => ingredient.id !== ingredientId
+    )
+    sessionStorage.setItem(
+      StorageType.INGREDIENT,
+      JSON.stringify(filteredIngredients)
+    )
+
     setRecipeData((prev) => ({
       ...prev,
-      recipeIngredients: recipeIngredients.filter(
-        (ingredient) => ingredient.id !== ingredientId
-      ),
+      recipeIngredients: filteredIngredients,
     }))
   }
 
@@ -100,7 +110,7 @@ const Ingredients = (): JSX.Element => {
             ))}
           </Form.Select>
           <br />
-          <Button type="submit" variant="success">
+          <Button type="submit" variant="light">
             Add an ingredient +
           </Button>
         </Form>

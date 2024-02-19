@@ -11,7 +11,7 @@ const Preview = (): JSX.Element => {
     <div className={css.preview}>
       <h2>Preview</h2>
       <PreviewPDF
-        pdfRecipeName={recipeName.recipe_name}
+        pdfRecipeName={recipeName}
         pdfIngredients={recipeIngredients}
         pdfInstructions={recipeInstructions}
       />

@@ -1,5 +1,9 @@
 // How to download web pages as PDF in React -> https://www.youtube.com/watch?v=QaZ2CoYFO60
-import { IngredientItem, InstructionItem } from '../globalTypes'
+import {
+  IngredientItem,
+  IngredientUnitValue,
+  InstructionItem,
+} from '../globalTypes'
 import { useRef } from 'react'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
@@ -48,7 +52,7 @@ const PreviewPDF = ({
 
   return (
     <>
-      <Button onClick={downloadPDF}>
+      <Button variant="light" onClick={downloadPDF}>
         <span>Save PDF</span> <i className="bi bi-file-earmark-pdf"></i>
       </Button>
       <div className={css.preview_pdf} ref={pdfRef}>
@@ -67,7 +71,15 @@ const PreviewPDF = ({
             <ul>
               {pdfIngredients.map((item) => (
                 <li key={item.id}>
-                  {item.name} {item.amount} {item.unit}
+                  {item.unit === IngredientUnitValue.AMOUNT ? (
+                    <span>
+                      {item.name} {item.amount}x
+                    </span>
+                  ) : (
+                    <span>
+                      {item.name} {item.amount} {item.unit}
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>

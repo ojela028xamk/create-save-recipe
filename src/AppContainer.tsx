@@ -9,17 +9,11 @@ import RecipeName from './RecipeName/RecipeName'
 import Ingredients from './Ingredients/Ingredients'
 import Instructions from './Instructions/Instructions'
 import Preview from './Preview/Preview'
-import {
-  getRecipeNameFromSessionStorage,
-  getSessionStorage,
-} from './Services/storageService'
+import { getSessionStorage } from './Services/storageService'
 
 export const [useRecipeData, RecipeDataProvider] =
   createStateContext<RecipeDataContext>({
-    recipeName: {
-      id: 'recipeNameStorage',
-      recipe_name: '',
-    },
+    recipeName: '',
     recipeIngredients: [],
     recipeInstructions: [],
   })
@@ -28,17 +22,19 @@ const AppContainer = (): JSX.Element => {
   const setRecipeData = useRecipeData()[1]
 
   useEffectOnce(() => {
-    const storageRecipeName = getRecipeNameFromSessionStorage()
+    const storageRecipeName = getSessionStorage(StorageType.RECIPE_NAME)
     const storageIngredients = getSessionStorage(StorageType.INGREDIENT)
     const storageInstructions = getSessionStorage(StorageType.INSTRUCTION)
+
     setRecipeData((prev) => ({
       ...prev,
-      recipeName: {
-        id: 'recipeNameStorage',
-        recipe_name: storageRecipeName,
-      },
-      recipeIngredients: storageIngredients as IngredientItem[],
-      recipeInstructions: storageInstructions as InstructionItem[],
+      recipeName: storageRecipeName ? (storageRecipeName as string) : '',
+      recipeIngredients: storageIngredients
+        ? (storageIngredients as IngredientItem[])
+        : [],
+      recipeInstructions: storageInstructions
+        ? (storageInstructions as InstructionItem[])
+        : [],
     }))
   })
 
