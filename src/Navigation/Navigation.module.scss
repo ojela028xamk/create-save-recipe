@@ -3,8 +3,29 @@
 .navigation {
     nav {
         background-color: $black;
+
         span {
             color: $white;
         }
+
+        .nav_link {
+            color: $white;
+            border-radius: 0.2em;
+            margin-right: 0.5em;
+        }
+
+        .nav_link_active {
+            background-color: $white;
+            color: $black;
+            border-radius: 0.2em;
+            margin-right: 0.5em;
+        }
+
+        .nav_link:hover {
+            background-color: $white;
+            color: $black;
+            border-radius: 0.2em;
+        }
+        
     }
 }
