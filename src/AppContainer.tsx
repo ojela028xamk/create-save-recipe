@@ -10,6 +10,7 @@ import Ingredients from './Ingredients/Ingredients'
 import Instructions from './Instructions/Instructions'
 import Preview from './Preview/Preview'
 import { getSessionStorage } from './Services/storageService'
+import css from './App.module.scss'
 
 export const [useRecipeData, RecipeDataProvider] =
   createStateContext<RecipeDataContext>({
@@ -40,10 +41,14 @@ const AppContainer = (): JSX.Element => {
 
   return (
     <>
-      <RecipeName />
-      <Ingredients />
-      <Instructions />
-      <Preview />
+      <div className={css.app_left}>
+        <Ingredients />
+        <Instructions />
+      </div>
+      <div className={css.app_right}>
+        <RecipeName />
+        <Preview />
+      </div>
     </>
   )
 }

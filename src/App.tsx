@@ -1,6 +1,6 @@
 import { JSX } from 'react'
-import css from './App.module.scss'
 import AppContext from './AppContainer'
+import css from './App.module.scss'
 
 const App = (): JSX.Element => {
   return (

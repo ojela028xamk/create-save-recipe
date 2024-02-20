@@ -7,7 +7,14 @@
 
   .app_grid_cntr {
     display: grid;
-    grid-template-columns: 2fr 3fr;
-    gap: 1.5em;
+
+    .app_left {
+      grid-column: 1;
+    }
+
+    .app_right {
+      grid-column: 2;
+    }
+    
   }
 }
