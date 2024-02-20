@@ -1,12 +1,12 @@
 .app {
-  width: 90%;
-  padding: 1em;
   margin: auto;
   text-align: center;
   margin-bottom: 2em;
 
   .app_grid_cntr {
     display: grid;
+    margin: auto;
+    width: 90%;
 
     .app_left {
       grid-column: 1;

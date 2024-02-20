@@ -1,0 +1,10 @@
+@import '../variables';
+
+.navigation {
+    nav {
+        background-color: $black;
+        span {
+            color: $white;
+        }
+    }
+}
