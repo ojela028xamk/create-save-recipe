@@ -3,6 +3,7 @@ import css from './RecipeName.module.scss'
 import { useEffect, useState } from 'react'
 import { StorageType } from '../globalTypes'
 import { useRecipeData } from '../AppContainer'
+import RecipeImage from './RecipeImage'
 
 const RecipeName = (): JSX.Element => {
   const [{ recipeName }, setRecipeData] = useRecipeData()
@@ -69,6 +70,7 @@ const RecipeName = (): JSX.Element => {
           </Button>
         )}
       </Form>
+      <RecipeImage />
     </div>
   )
 }
