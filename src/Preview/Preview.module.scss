@@ -47,7 +47,6 @@
         width: 793px;
 
         .header {
-            display: inline-block;
             position: relative;
             padding: 2em;
             
@@ -62,10 +61,12 @@
             }
 
             .header_image {
+              object-fit: cover;
               display: block;
               border-radius: 1.5em;
               z-index: -1;
-              width: 60%;
+              width: 350px;
+              height: 290px;
             }
         }
 

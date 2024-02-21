@@ -20,6 +20,7 @@ type AppContextProps = {
 export const [useRecipeData, RecipeDataProvider] =
   createStateContext<RecipeDataContext>({
     recipeName: '',
+    recipeImage: '',
     recipeIngredients: [],
     recipeInstructions: [],
   })

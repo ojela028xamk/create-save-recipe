@@ -12,12 +12,14 @@ import css from './Preview.module.scss'
 
 type PreviewPDFProps = {
   pdfRecipeName: string
+  pdfRecipeImage: string
   pdfIngredients: IngredientItem[]
   pdfInstructions: InstructionItem[]
 }
 
 const PreviewPDF = ({
   pdfRecipeName,
+  pdfRecipeImage,
   pdfIngredients,
   pdfInstructions,
 }: PreviewPDFProps): JSX.Element => {
@@ -58,12 +60,7 @@ const PreviewPDF = ({
       <div className={css.preview_pdf} ref={pdfRef}>
         <div className={css.header}>
           <h1 className={css.header_text}>{pdfRecipeName}</h1>
-          <Image
-            className={css.header_image}
-            src={
-              'https://images.pexels.com/photos/566345/pexels-photo-566345.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-            }
-          />
+          <Image className={css.header_image} src={pdfRecipeImage} />
         </div>
         <div className={css.content}>
           <div className={css.ingredients}>

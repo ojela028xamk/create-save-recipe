@@ -1,9 +1,10 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent } from 'react'
 import { Form } from 'react-bootstrap'
 import css from './RecipeName.module.scss'
+import { useRecipeData } from '../AppContainer'
 
 const RecipeImage = (): JSX.Element => {
-  const [recipeImg, setRecipeImg] = useState<string>('')
+  const setRecipeData = useRecipeData()[1]
 
   const handleNewRecipeImage = (event: ChangeEvent<HTMLInputElement>): void => {
     if (
@@ -13,7 +14,10 @@ const RecipeImage = (): JSX.Element => {
       event.currentTarget.files.length
     ) {
       const newImg = URL.createObjectURL(event.currentTarget.files[0])
-      setRecipeImg(newImg)
+      setRecipeData((prev) => ({
+        ...prev,
+        recipeImage: newImg,
+      }))
     }
   }
 
@@ -22,9 +26,9 @@ const RecipeImage = (): JSX.Element => {
       <Form className={css.recipe_image_form}>
         <Form.Control
           type="file"
+          accept="image/*"
           onChange={handleNewRecipeImage}
         ></Form.Control>
-        <img src={recipeImg}></img>
       </Form>
     </div>
   )
