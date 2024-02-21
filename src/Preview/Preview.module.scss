@@ -4,8 +4,7 @@
   border: 2px solid $black;
   box-shadow: 8px 8px 0px 0px $orange;
   padding-bottom: 1em;
-  grid-column: 2;
-  grid-row: 1 / 4;
+  margin: 1.5em;
 
   h2 { 
     background-color: $black;
@@ -37,7 +36,6 @@
     background-color: $white;
     color: $orange;
   }
-
 
     .preview_pdf {
         margin: auto;

@@ -10,6 +10,12 @@ import Ingredients from './Ingredients/Ingredients'
 import Instructions from './Instructions/Instructions'
 import Preview from './Preview/Preview'
 import { getSessionStorage } from './Services/storageService'
+import css from './App.module.scss'
+
+type AppContextProps = {
+  showIngredients: boolean
+  showInstructions: boolean
+}
 
 export const [useRecipeData, RecipeDataProvider] =
   createStateContext<RecipeDataContext>({
@@ -18,7 +24,10 @@ export const [useRecipeData, RecipeDataProvider] =
     recipeInstructions: [],
   })
 
-const AppContainer = (): JSX.Element => {
+const AppContainer = ({
+  showIngredients,
+  showInstructions,
+}: AppContextProps): JSX.Element => {
   const setRecipeData = useRecipeData()[1]
 
   useEffectOnce(() => {
@@ -40,17 +49,27 @@ const AppContainer = (): JSX.Element => {
 
   return (
     <>
-      <RecipeName />
-      <Ingredients />
-      <Instructions />
-      <Preview />
+      <div className={css.app_left}>
+        {showIngredients && <Ingredients />}
+        {showInstructions && <Instructions />}
+      </div>
+      <div className={css.app_right}>
+        <RecipeName />
+        <Preview />
+      </div>
     </>
   )
 }
 
-const AppContext = (): JSX.Element => (
+const AppContext = ({
+  showIngredients,
+  showInstructions,
+}: AppContextProps): JSX.Element => (
   <RecipeDataProvider>
-    <AppContainer />
+    <AppContainer
+      showIngredients={showIngredients}
+      showInstructions={showInstructions}
+    />
   </RecipeDataProvider>
 )
 
