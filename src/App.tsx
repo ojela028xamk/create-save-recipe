@@ -1,3 +1,5 @@
+// Background image by Ray Piedra
+// https://www.pexels.com/fi-fi/kuva/leipa-ruoka-voileipa-terveellinen-1565982/
 import { JSX, useState } from 'react'
 import AppContext from './AppContainer'
 import css from './App.module.scss'
