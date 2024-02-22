@@ -4,7 +4,7 @@ import PreviewPDF from './PreviewPDF'
 import { useRecipeData } from '../AppContainer'
 
 const Preview = (): JSX.Element => {
-  const [{ recipeName, recipeIngredients, recipeInstructions }] =
+  const [{ recipeName, recipeImage, recipeIngredients, recipeInstructions }] =
     useRecipeData()
 
   return (
@@ -12,6 +12,7 @@ const Preview = (): JSX.Element => {
       <h2>Preview</h2>
       <PreviewPDF
         pdfRecipeName={recipeName}
+        pdfRecipeImage={recipeImage}
         pdfIngredients={recipeIngredients}
         pdfInstructions={recipeInstructions}
       />

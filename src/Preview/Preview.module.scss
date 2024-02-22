@@ -5,6 +5,7 @@
   box-shadow: 8px 8px 0px 0px $orange;
   padding-bottom: 1em;
   margin: 1.5em;
+  background-color: $white;
 
   h2 { 
     background-color: $black;
@@ -44,10 +45,9 @@
         border: 6px double $black;
         padding: 1.5em;
         height: 1122px;
-        width: 793px;
+        max-width: 793px;
 
         .header {
-            display: inline-block;
             position: relative;
             padding: 2em;
             
@@ -62,10 +62,12 @@
             }
 
             .header_image {
+              object-fit: cover;
               display: block;
               border-radius: 1.5em;
               z-index: -1;
-              width: 60%;
+              width: 350px;
+              height: 290px;
             }
         }
 

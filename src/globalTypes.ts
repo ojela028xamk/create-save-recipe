@@ -1,5 +1,6 @@
 export type RecipeDataContext = {
   recipeName: string
+  recipeImage: string
   recipeIngredients: IngredientItem[]
   recipeInstructions: InstructionItem[]
 }
