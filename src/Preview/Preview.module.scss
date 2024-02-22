@@ -45,7 +45,7 @@
         border: 6px double $black;
         padding: 1.5em;
         height: 1122px;
-        width: 793px;
+        max-width: 793px;
 
         .header {
             position: relative;
