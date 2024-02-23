@@ -67,30 +67,30 @@ const Instructions = (): JSX.Element => {
           <Form.Label>Instruction Step</Form.Label>
           <Form.Control
             required
-            type="text"
+            type='text'
             value={instructionStep}
-            placeholder="Add an instruction..."
+            placeholder='Add an instruction...'
             onChange={(event) => setInstructionStep(event.currentTarget.value)}
           ></Form.Control>
           <br />
-          <Button type="submit" variant="light">
+          <Button type='submit' variant='light'>
             Add an instruction +
           </Button>
         </Form>
       </div>
       <div className={css.instructions_list}>
         {recipeInstructions && recipeInstructions.length ? (
-          <ListGroup as="ol" numbered>
+          <ListGroup as='ol' numbered>
             {recipeInstructions.map((instruction) => (
               <ListGroup.Item
                 key={instruction.id}
-                as="li"
-                className="d-flex justify-content-between align-items-start"
+                as='li'
+                className='d-flex justify-content-between align-items-start'
               >
                 <span>{instruction.step}</span>
                 <Button
-                  variant="outline-danger"
-                  size="sm"
+                  variant='outline-danger'
+                  size='sm'
                   onClick={() => handleDeleteInstruction(instruction.id)}
                 >
                   X
@@ -99,7 +99,7 @@ const Instructions = (): JSX.Element => {
             ))}
           </ListGroup>
         ) : (
-          <Alert variant="secondary">No instructions...</Alert>
+          <Alert variant='secondary'>No instructions...</Alert>
         )}
       </div>
     </div>

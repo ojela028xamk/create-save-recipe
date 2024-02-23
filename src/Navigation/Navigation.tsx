@@ -17,14 +17,14 @@ const Navigation = ({
     <div className={css.navigation}>
       <Navbar>
         <Container>
-          <Navbar.Brand className="justify-content-md-center">
-            <img alt="" src={logo} width="50" height="50" />
+          <Navbar.Brand className='justify-content-md-center'>
+            <img alt='' src={logo} width='50' height='50' />
             <span>
               {' '}
               Create<span style={{ color: '#fe5000ff' }}>&</span>Save Recipe
             </span>
           </Navbar.Brand>
-          <Nav className="me-auto">
+          <Nav className='me-auto'>
             <Nav.Link
               className={showIngredients ? css.nav_link_active : css.nav_link}
               onClick={() => toggleNav(true, false)}

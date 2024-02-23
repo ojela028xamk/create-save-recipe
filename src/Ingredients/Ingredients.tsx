@@ -80,18 +80,18 @@ const Ingredients = (): JSX.Element => {
           <Form.Label>Name</Form.Label>
           <Form.Control
             required
-            type="text"
+            type='text'
             value={ingredientName}
-            placeholder="Name..."
+            placeholder='Name...'
             onChange={(event) => setIngredientName(event.currentTarget.value)}
           />
 
           <Form.Label>Amount</Form.Label>
           <Form.Control
             required
-            type="number"
+            type='number'
             value={ingredientAmount}
-            placeholder="Amount..."
+            placeholder='Amount...'
             onChange={(event) =>
               setIngredientAmount(Number(event.currentTarget.value))
             }
@@ -99,7 +99,7 @@ const Ingredients = (): JSX.Element => {
           <Form.Label>Unit</Form.Label>
           <Form.Select
             required
-            aria-label="Default select example"
+            aria-label='Default select example'
             onChange={(event) => setIngredientUnit(event.currentTarget.value)}
           >
             <option value={''}></option>
@@ -110,7 +110,7 @@ const Ingredients = (): JSX.Element => {
             ))}
           </Form.Select>
           <br />
-          <Button type="submit" variant="light">
+          <Button type='submit' variant='light'>
             Add an ingredient +
           </Button>
         </Form>
@@ -123,7 +123,7 @@ const Ingredients = (): JSX.Element => {
               <th>Amount</th>
               <th>Unit</th>
               <th>
-                <i className="bi bi-trash"></i>
+                <i className='bi bi-trash'></i>
               </th>
             </tr>
           </thead>
@@ -136,8 +136,8 @@ const Ingredients = (): JSX.Element => {
                   <td>{item.unit}</td>
                   <td>
                     <Button
-                      variant="outline-danger"
-                      size="sm"
+                      variant='outline-danger'
+                      size='sm'
                       onClick={() => handleDeleteIngredient(item.id)}
                     >
                       X

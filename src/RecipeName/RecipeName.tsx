@@ -49,24 +49,24 @@ const RecipeName = (): JSX.Element => {
       >
         <Form.Control
           required
-          type="text"
+          type='text'
           value={recipeNameValue}
           disabled={!isEditRecipeName}
-          placeholder="Add recipe name..."
+          placeholder='Add recipe name...'
           onChange={(event) => setRecipeNameValue(event.currentTarget.value)}
         ></Form.Control>
         {isEditRecipeName && (
-          <Button type="submit" variant="light">
-            <i className="bi bi-check"></i>
+          <Button type='submit' variant='light'>
+            <i className='bi bi-check'></i>
           </Button>
         )}
         {!isEditRecipeName && (
           <Button
-            type="button"
-            variant="light"
+            type='button'
+            variant='light'
             onClick={() => setIsEditRecipeName(true)}
           >
-            Edit <i className="bi bi-pen"></i>
+            Edit <i className='bi bi-pen'></i>
           </Button>
         )}
       </Form>

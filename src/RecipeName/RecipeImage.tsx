@@ -25,8 +25,8 @@ const RecipeImage = (): JSX.Element => {
     <div className={css.recipe_image}>
       <Form className={css.recipe_image_form}>
         <Form.Control
-          type="file"
-          accept="image/*"
+          type='file'
+          accept='image/*'
           onChange={handleNewRecipeImage}
         ></Form.Control>
       </Form>
