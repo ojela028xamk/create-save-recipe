@@ -1,4 +1,5 @@
 import { Container, Nav, Navbar } from 'react-bootstrap'
+import logo from '../chefhat.png'
 import css from './Navigation.module.scss'
 
 type NavigationProps = {
@@ -16,15 +17,12 @@ const Navigation = ({
     <div className={css.navigation}>
       <Navbar>
         <Container>
-          <Navbar.Brand>
-            <img
-              alt=""
-              src="https://react-bootstrap.netlify.app/img/logo.svg"
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-            />
-            <span> Create Save Recipe</span>
+          <Navbar.Brand className="justify-content-md-center">
+            <img alt="" src={logo} width="50" height="50" />
+            <span>
+              {' '}
+              Create<span style={{ color: '#fe5000ff' }}>&</span>Save Recipe
+            </span>
           </Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link
