@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react'
 import { Form } from 'react-bootstrap'
-import css from './RecipeName.module.scss'
 import { useRecipeData } from '../AppContainer'
+import css from './RecipeName.module.scss'
 
 const RecipeImage = (): JSX.Element => {
   const setRecipeData = useRecipeData()[1]

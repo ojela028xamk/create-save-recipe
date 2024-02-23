@@ -10,6 +10,8 @@ import Ingredients from './Ingredients/Ingredients'
 import Instructions from './Instructions/Instructions'
 import Preview from './Preview/Preview'
 import { getSessionStorage } from './Services/storageService'
+// Placeholder recipe image -> https://pixabay.com/illustrations/hamburger-burger-beef-pork-meat-5945987/
+import placeholder_img from './placeholder_img.png'
 import css from './App.module.scss'
 
 type AppContextProps = {
@@ -20,7 +22,7 @@ type AppContextProps = {
 export const [useRecipeData, RecipeDataProvider] =
   createStateContext<RecipeDataContext>({
     recipeName: '',
-    recipeImage: '',
+    recipeImage: placeholder_img,
     recipeIngredients: [],
     recipeInstructions: [],
   })
