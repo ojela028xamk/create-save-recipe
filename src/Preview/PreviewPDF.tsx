@@ -7,7 +7,7 @@ import {
 import { useRef } from 'react'
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
-import { Button, Image } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import css from './Preview.module.scss'
 
 type PreviewPDFProps = {
@@ -47,7 +47,7 @@ const PreviewPDF = ({
           imgWidth * ratio,
           imgHeight * ratio
         )
-        pdf.save('testi123.pdf')
+        pdf.save(`${pdfRecipeName}.pdf`)
       })
     }
   }
@@ -60,7 +60,10 @@ const PreviewPDF = ({
       <div className={css.preview_pdf} ref={pdfRef}>
         <div className={css.header}>
           <h1 className={css.header_text}>{pdfRecipeName}</h1>
-          <Image className={css.header_image} src={pdfRecipeImage} />
+          <div
+            className={css.header_image}
+            style={{ backgroundImage: `url(${pdfRecipeImage})` }}
+          ></div>
         </div>
         <div className={css.content}>
           <div className={css.ingredients}>
