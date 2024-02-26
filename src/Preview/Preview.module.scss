@@ -64,10 +64,9 @@
 
             .header_image {
               background-color: $white;
-              object-fit: cover;
-              display: block;
+              background-size: cover;
+              background-position: center;
               border-radius: 1.5em;
-              z-index: -1;
               width: 350px;
               height: 290px;
             }

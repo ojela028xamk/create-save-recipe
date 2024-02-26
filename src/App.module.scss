@@ -1,8 +1,11 @@
+@import './variables';
+
 .app {
   margin: auto;
   text-align: center;
   background-image: url('./app_background.jpg');
   background-size: cover;
+  background-color: $sandwhite;
 
   .app_grid_cntr {
     display: grid;
