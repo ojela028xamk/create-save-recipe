@@ -1,39 +1,39 @@
 @import '../variables';
 
 .recipe_name {
-    border: 2px solid $black;
-    box-shadow: 8px 8px 0px 0px $orange;
-    margin: 1.5em;
+  border: 2px solid $black;
+  box-shadow: 8px 8px 0px 0px $orange;
+  margin: 1.5em;
+  background-color: $white;
+
+  h2 {
+    background-color: $black;
+    color: $white;
+    font-family: 'Montserrat', sans-serif;
+    padding: 0.2em;
+  }
+
+  button {
+    display: inline;
+    margin-left: 1em;
+    color: $white;
+    background-color: $orange;
+    border: 2px solid $orange;
+  }
+
+  button:hover {
+    color: $orange;
     background-color: $white;
-    
-    h2 {
-        background-color: $black;
-        color: $white;
-        font-family: 'Montserrat', sans-serif;
-        padding: 0.2em;
+    border: 2px solid $orange;
+  }
+
+  .recipe_name_form,
+  .recipe_image_form {
+    display: flex;
+    padding: 1em;
+
+    input {
+      width: 80%;
     }
-
-    button {
-        display: inline;
-        margin-left: 1em;
-        color: $white;
-        background-color: $orange;
-        border: 2px solid $orange;
-    }
-
-    button:hover {
-        color: $orange;
-        background-color: $white;
-        border: 2px solid $orange;
-    }
-
-    .recipe_name_form, .recipe_image_form {
-        display: flex;
-        padding: 1em;
-
-        input {
-            width: 80%;
-        }
-
-    }
+  }
 }

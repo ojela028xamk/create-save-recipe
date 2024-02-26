@@ -7,7 +7,7 @@
   margin: 1.5em;
   background-color: $white;
 
-  h2 { 
+  h2 {
     background-color: $black;
     color: $white;
     font-family: 'Montserrat', sans-serif;
@@ -29,7 +29,6 @@
       vertical-align: middle;
       font-size: 1.4em;
     }
-  
   }
 
   button:hover {
@@ -38,82 +37,81 @@
     color: $orange;
   }
 
-    .preview_pdf {
-        overflow: hidden;
-        margin: auto;
-        font-family: 'Merienda', cursive;
-        background-color: $sandwhite;
-        border: 6px double $black;
-        padding: 1.5em;
-        height: 1122px;
-        max-width: 793px;
+  .preview_pdf {
+    overflow: hidden;
+    margin: auto;
+    font-family: 'Merienda', cursive;
+    background-color: $sandwhite;
+    border: 6px double $black;
+    padding: 1.5em;
+    height: 1122px;
+    max-width: 793px;
 
-        .header {
-            position: relative;
-            padding: 2em;
-            
-            .header_text {
-              position: absolute;
-              left: 15vw;
-              bottom: 3.5vw;
-              padding: 0.5em;
-              font-size: 2.2vw;
-              background-color: $white;
-              border-radius: 0.3em;
-            }
+    .header {
+      position: relative;
+      padding: 2em;
 
-            .header_image {
-              background-color: $white;
-              background-size: cover;
-              background-position: center;
-              border-radius: 1.5em;
-              width: 350px;
-              height: 290px;
-            }
-        }
+      .header_text {
+        position: absolute;
+        left: 15vw;
+        bottom: 3.5vw;
+        padding: 0.5em;
+        font-size: 2.2vw;
+        background-color: $white;
+        border-radius: 0.3em;
+      }
 
-        .content {
-            display: flex;
-            flex-direction: row;
-            background-color: $white;
-            border-radius: 1.5em;
-            padding: 1.2em;
-            border-top: 5px solid $black;
-            border-bottom: 5px solid $black;
-          }
-
-          h4 {
-            margin-bottom: 1em;
-          }
-
-          .ingredients {
-            flex: 3;
-
-            ul {
-              font-size: 1.1em;
-              font-family: 'Montserrat', sans-serif;
-              padding-left: 0;
-              list-style-type: none;
-              li {
-                margin-bottom: 5px;
-              }
-            }
-          }
-
-          .instructions {
-            flex: 4;
-
-            ul {
-              font-size: 1.1em;
-              font-family: 'Montserrat', sans-serif;
-              padding-left: 0;
-              list-style-type: none;
-              text-align: left;
-              li {
-                margin-bottom: 5px;
-              }
-            }
-          }
-
+      .header_image {
+        background-color: $white;
+        background-size: cover;
+        background-position: center;
+        border-radius: 1.5em;
+        width: 350px;
+        height: 290px;
+      }
     }
+
+    .content {
+      display: flex;
+      flex-direction: row;
+      background-color: $white;
+      border-radius: 1.5em;
+      padding: 1.2em;
+      border-top: 5px solid $black;
+      border-bottom: 5px solid $black;
+    }
+
+    h4 {
+      margin-bottom: 1em;
+    }
+
+    .ingredients {
+      flex: 3;
+
+      ul {
+        font-size: 1.1em;
+        font-family: 'Montserrat', sans-serif;
+        padding-left: 0;
+        list-style-type: none;
+        li {
+          margin-bottom: 5px;
+        }
+      }
+    }
+
+    .instructions {
+      flex: 4;
+
+      ul {
+        font-size: 1.1em;
+        font-family: 'Montserrat', sans-serif;
+        padding-left: 0;
+        list-style-type: none;
+        text-align: left;
+        li {
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
 }
