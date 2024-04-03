@@ -7,7 +7,6 @@ import { useRecipeData } from '../AppContainer'
 const Instructions = (): JSX.Element => {
   const [{ recipeInstructions }, setRecipeData] = useRecipeData()
   const [instructionStep, setInstructionStep] = useState<string>('')
-  const [showValidated, setShowValidated] = useState<boolean>(false)
 
   const getId = (): string => {
     return Date.now().toString(36)
@@ -16,8 +15,7 @@ const Instructions = (): JSX.Element => {
   const handleNewInstruction = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
 
-    if (event.currentTarget.checkValidity() === false) {
-      setShowValidated(true)
+    if (!event.currentTarget.checkValidity()) {
       return
     }
 
@@ -34,9 +32,8 @@ const Instructions = (): JSX.Element => {
     )
     setRecipeData((prev) => ({
       ...prev,
-      recipeInstructions: [...recipeInstructions, newInstruction],
+      recipeInstructions: currentInstructions,
     }))
-    setShowValidated(false)
     setInstructionStep('')
   }
 
@@ -59,11 +56,7 @@ const Instructions = (): JSX.Element => {
     <div className={css.instructions}>
       <h2>Instructions</h2>
       <div className={css.instructions_add}>
-        <Form
-          noValidate
-          validated={showValidated}
-          onSubmit={(event) => handleNewInstruction(event)}
-        >
+        <Form noValidate onSubmit={handleNewInstruction}>
           <Form.Label>Instruction Step</Form.Label>
           <Form.Control
             required
@@ -71,7 +64,7 @@ const Instructions = (): JSX.Element => {
             value={instructionStep}
             placeholder='Add an instruction...'
             onChange={(event) => setInstructionStep(event.currentTarget.value)}
-          ></Form.Control>
+          />
           <br />
           <Button type='submit' variant='light'>
             Add an instruction +

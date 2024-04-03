@@ -75,7 +75,7 @@ const Ingredients = (): JSX.Element => {
         <Form
           noValidate
           validated={showValidated}
-          onSubmit={(event) => handleNewIngredient(event)}
+          onSubmit={handleNewIngredient}
         >
           <Form.Label>Name</Form.Label>
           <Form.Control
