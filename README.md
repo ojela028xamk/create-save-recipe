@@ -14,7 +14,3 @@ This site allows users to create and save their favorite recipes as PDF.
 - Typescript
 - React
 - SCSS
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
