@@ -98,7 +98,6 @@ const Ingredients = (): JSX.Element => {
           />
           <Form.Label>Unit</Form.Label>
           <Form.Select
-            required
             aria-label='Default select example'
             onChange={(event) => setIngredientUnit(event.currentTarget.value)}
           >
