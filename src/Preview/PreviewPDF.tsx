@@ -23,7 +23,7 @@ const PreviewPDF = ({
   pdfIngredients,
   pdfInstructions,
 }: PreviewPDFProps): JSX.Element => {
-  const pdfRef = useRef(null)
+  const pdfRef = useRef<HTMLDivElement>(null)
 
   const downloadPDF = (): void => {
     const input = pdfRef.current

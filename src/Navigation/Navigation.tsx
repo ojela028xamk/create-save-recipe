@@ -13,6 +13,14 @@ const Navigation = ({
   showIngredients,
   showInstructions,
 }: NavigationProps): JSX.Element => {
+  const handleIngredientsClick = (): void => {
+    toggleNav(true, false)
+  }
+
+  const handleInstructionsClick = (): void => {
+    toggleNav(false, true)
+  }
+
   return (
     <div className={css.navigation}>
       <Navbar>
@@ -27,13 +35,13 @@ const Navigation = ({
           <Nav className='me-auto'>
             <Nav.Link
               className={showIngredients ? css.nav_link_active : css.nav_link}
-              onClick={() => toggleNav(true, false)}
+              onClick={handleIngredientsClick}
             >
               Add ingredients
             </Nav.Link>
             <Nav.Link
               className={showInstructions ? css.nav_link_active : css.nav_link}
-              onClick={() => toggleNav(false, true)}
+              onClick={handleInstructionsClick}
             >
               Add instructions
             </Nav.Link>

@@ -7,13 +7,9 @@ const RecipeImage = (): JSX.Element => {
   const setRecipeData = useRecipeData()[1]
 
   const handleNewRecipeImage = (event: ChangeEvent<HTMLInputElement>): void => {
-    if (
-      event &&
-      event.currentTarget &&
-      event.currentTarget.files &&
-      event.currentTarget.files.length
-    ) {
-      const newImg = URL.createObjectURL(event.currentTarget.files[0])
+    const file = event.currentTarget.files?.[0]
+    if (file) {
+      const newImg = URL.createObjectURL(file)
       setRecipeData((prev) => ({
         ...prev,
         recipeImage: newImg,
@@ -28,7 +24,7 @@ const RecipeImage = (): JSX.Element => {
           type='file'
           accept='image/*'
           onChange={handleNewRecipeImage}
-        ></Form.Control>
+        />
       </Form>
     </div>
   )

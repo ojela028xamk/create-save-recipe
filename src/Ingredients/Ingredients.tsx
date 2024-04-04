@@ -75,7 +75,7 @@ const Ingredients = (): JSX.Element => {
         <Form
           noValidate
           validated={showValidated}
-          onSubmit={(event) => handleNewIngredient(event)}
+          onSubmit={handleNewIngredient}
         >
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -98,7 +98,6 @@ const Ingredients = (): JSX.Element => {
           />
           <Form.Label>Unit</Form.Label>
           <Form.Select
-            required
             aria-label='Default select example'
             onChange={(event) => setIngredientUnit(event.currentTarget.value)}
           >
