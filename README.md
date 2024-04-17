@@ -8,9 +8,11 @@ This site allows users to create and save their favorite recipes as PDF.
 - Ingredient and instruction management
 - User can add a custom image to PDF
 
-## Technologies Used
+## Technologies/libraries used
 
 - HTML, CSS, JavaScript
 - Typescript
 - React
-- SCSS
+- React Bootstrap
+- SASS
+- React-use
